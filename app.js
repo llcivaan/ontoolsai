@@ -53,6 +53,93 @@ const MODULES=[
   ]},
 ];
 
+const TRADE_FIELD_EXAMPLES={
+  cleaning:{
+    your_name:"e.g. Sarah, Sparkle Clean",
+    business_name:"e.g. Sparkle Clean Services",
+    your_business:"e.g. Sparkle Clean Services",
+    job_type:"e.g. end of tenancy clean, weekly house clean",
+    complaint:"e.g. cleaner left early, missed the bathrooms",
+    resolution:"e.g. free re-clean, 10% refund",
+    focus:"e.g. spring deep cleans, gift vouchers",
+    service:"e.g. deep clean, oven clean",
+    offer:"e.g. 20% off spring clean, free oven clean",
+    speciality:"e.g. eco-friendly products, same-day bookings",
+    role:"e.g. experienced cleaner, team leader",
+    pay:"e.g. $22–26/hr, flexible hours, products provided",
+  },
+  hvac:{
+    your_name:"e.g. Mike, CoolAir HVAC",
+    business_name:"e.g. CoolAir HVAC Services",
+    your_business:"e.g. CoolAir HVAC Services",
+    job_type:"e.g. AC service, boiler install, duct cleaning",
+    complaint:"e.g. unit still making noise, didn't fix the issue",
+    resolution:"e.g. free callback, partial refund on labour",
+    focus:"e.g. pre-summer AC tune-ups, heat pump installs",
+    service:"e.g. AC tune-up, boiler service",
+    offer:"e.g. $30 off summer AC check, free filter swap",
+    speciality:"e.g. emergency callouts, commercial HVAC",
+    role:"e.g. HVAC technician, service engineer",
+    pay:"e.g. $28–35/hr, van + fuel card, overtime available",
+  },
+  plumbing:{
+    your_name:"e.g. Dave, Dave's Plumbing",
+    business_name:"e.g. Premier Plumbing Co.",
+    your_business:"e.g. Premier Plumbing Co.",
+    job_type:"e.g. burst pipe repair, bathroom install",
+    complaint:"e.g. leak came back after 2 days, left a mess",
+    resolution:"e.g. free return visit, 10% off next job",
+    focus:"e.g. emergency callouts, bathroom renos",
+    service:"e.g. pipe inspection, drain unblocking",
+    offer:"e.g. free inspection with any repair",
+    speciality:"e.g. emergency callouts, bathroom renovations",
+    role:"e.g. experienced plumber, apprentice",
+    pay:"e.g. $30–38/hr, tools provided, on-call bonus",
+  },
+  landscaping:{
+    your_name:"e.g. Jake, Green Cut Landscaping",
+    business_name:"e.g. Green Cut Landscaping",
+    your_business:"e.g. Green Cut Landscaping",
+    job_type:"e.g. lawn mowing, garden clearance, hedge trimming",
+    complaint:"e.g. missed a section, damaged a plant",
+    resolution:"e.g. free return visit, replant at no cost",
+    focus:"e.g. spring tidy-ups, new lawn installs",
+    service:"e.g. seasonal lawn care, garden tidy",
+    offer:"e.g. free lawn assessment, 10% off spring bookings",
+    speciality:"e.g. landscape design, irrigation systems",
+    role:"e.g. landscaper, grounds maintenance",
+    pay:"e.g. $24–28/hr, vehicle + uniform provided",
+  },
+  roofing:{
+    your_name:"e.g. Chris, ProRoof Ltd",
+    business_name:"e.g. ProRoof Roofing Ltd",
+    your_business:"e.g. ProRoof Roofing Ltd",
+    job_type:"e.g. tile replacement, flat roof repair",
+    complaint:"e.g. still leaking after repair, debris left behind",
+    resolution:"e.g. free inspection and fix, cost-free return",
+    focus:"e.g. pre-winter inspections, storm damage repairs",
+    service:"e.g. roof inspection, gutter replacement",
+    offer:"e.g. free inspection this month, 10% off before winter",
+    speciality:"e.g. flat roofing, heritage slate, emergency repairs",
+    role:"e.g. roofer, labourer, site supervisor",
+    pay:"e.g. $28–36/hr + travel, tools provided",
+  },
+  electrical:{
+    your_name:"e.g. Tom, Bright Spark Electrical",
+    business_name:"e.g. Bright Spark Electrical",
+    your_business:"e.g. Bright Spark Electrical",
+    job_type:"e.g. consumer unit upgrade, EV charger install",
+    complaint:"e.g. circuit still tripping, sockets not working",
+    resolution:"e.g. free callback, partial refund on labour",
+    focus:"e.g. EV chargers, smart home installs",
+    service:"e.g. electrical safety check, garden lighting",
+    offer:"e.g. free safety inspection, $50 off EV charger",
+    speciality:"e.g. EV chargers, commercial electrical",
+    role:"e.g. qualified electrician, apprentice",
+    pay:"e.g. $30–40/hr, van provided, NICEIC work",
+  },
+};
+
 const AFFILIATES={
   quote_followup:{name:"Jobber",cta:"Send quotes & track follow-ups automatically",desc:"200,000+ trade businesses use Jobber. It chases quotes so you don't have to.",link:"#"},
   running_late:{name:"Housecall Pro",cta:"Automate on-my-way texts for every job",desc:"Customers get automatic SMS updates before you arrive. Zero effort.",link:"#"},
@@ -642,7 +729,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                   , toolObj.fields.map(f=>(
                     React.createElement('div', { key: f.id}
                       , React.createElement('label', { style: {display:"block",fontSize:11,color:"#AAA",marginBottom:5,fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase"}}, f.label)
-                      , React.createElement('input', { value: fields[f.id]||"", onChange: e=>setFields({...fields,[f.id]:e.target.value}), placeholder: f.ph,
+                      , React.createElement('input', { value: fields[f.id]||"", onChange: e=>setFields({...fields,[f.id]:e.target.value}), placeholder: (trade&&TRADE_FIELD_EXAMPLES[trade]&&TRADE_FIELD_EXAMPLES[trade][f.id])||f.ph,
                         style: {width:"100%",background:C.surface,border:`0.5px solid ${C.border2}`,borderRadius:10,padding:"11px 13px",color:C.text,fontSize:14,outline:"none",boxSizing:"border-box",fontFamily:"inherit",transition:"border-color 0.15s"},
                         onFocus: e=>{e.target.style.borderColor=C.amber;},
                         onBlur: e=>{e.target.style.borderColor=C.border2;}})
@@ -751,8 +838,8 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       ))
                     )
 
-                    /* Affiliate */
-                    , affiliate&&(
+                    /* Affiliate — shown after 3 uses */
+                    , affiliate&&usage>=3&&(
                       React.createElement('div', { style: {background:"#0D1A10",border:`0.5px solid #152015`,borderRadius:12,padding:"12px 14px",marginBottom:12}}
                         , React.createElement('div', { style: {fontSize:10,color:C.green,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:5}}, "💡 Next step"  )
                         , React.createElement('div', { style: {fontSize:13,color:"#C8E6C9",fontWeight:600,marginBottom:3}}, affiliate.cta)
