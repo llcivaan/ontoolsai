@@ -24,6 +24,22 @@
     Access-Control-Allow-Headers = "Content-Type"
 
 [[redirects]]
-  from = "/*"
+  from = "/app"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "/app/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/website-index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/website-index.html"
+  status = 200
+
