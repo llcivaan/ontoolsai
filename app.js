@@ -218,11 +218,12 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
   const [feedbackReply,setFeedbackReply]=React.useState("");
   const [plan,setPlan]=React.useState("free"); // 'free' | 'pro' | 'business'
   const [showActivate,setShowActivate]=React.useState(false);
-  const [activateKey,setActivateKey]=React.useState("");
+  const [activateEmail,setActivateEmail]=React.useState("");
   const [activateLoading,setActivateLoading]=React.useState(false);
   const [activateError,setActivateError]=React.useState("");
   const [checkoutEmail,setCheckoutEmail]=React.useState("");
   const [checkoutLoading,setCheckoutLoading]=React.useState(false);
+  const [showCheckoutEmail,setShowCheckoutEmail]=React.useState(false);
 
   React.useEffect(()=>{
     setUsage(parseInt(localStorage.getItem("ontoolsai_usage")||"0"));
@@ -231,6 +232,22 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
     setDemoUsed(!!localStorage.getItem("ontoolsai_demo"));
     const savedPlan=localStorage.getItem("ontoolsai_plan");
     if(savedPlan&&savedPlan!=="free")setPlan(savedPlan);
+    // Auto-check if user is returning from checkout
+    const pendingEmail=localStorage.getItem("ontoolsai_pending_email");
+    if(pendingEmail&&(!savedPlan||savedPlan==="free")){
+      setTimeout(async()=>{
+        try{
+          const res=await fetch("/.netlify/functions/ls-check-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:pendingEmail})});
+          const data=await res.json();
+          if(data.valid){
+            setPlan(data.plan);
+            localStorage.setItem("ontoolsai_plan",data.plan);
+            localStorage.setItem("ontoolsai_email",pendingEmail);
+            localStorage.removeItem("ontoolsai_pending_email");
+          }
+        }catch (e2){/* silent */}
+      },2000);
+    }
   },[]);
 
   const tradeObj=TRADES.find(t=>t.id===trade);
@@ -256,7 +273,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       if(!isPro&&!bv)text+="\n\n— Sorted with OnToolsAI (ontoolsai.com)";
       setOutput(text);
       const n=usage+1;setUsage(n);localStorage.setItem("ontoolsai_usage",n.toString());
-    }catch (e2){setOutput("Connection error. Please check your internet and try again.");}
+    }catch (e3){setOutput("Connection error. Please check your internet and try again.");}
     setLoading(false);
   };
 
@@ -274,7 +291,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       const data=await res.json();
       setDemoOutput(_optionalChain([data, 'access', _24 => _24.content, 'optionalAccess', _25 => _25[0], 'optionalAccess', _26 => _26.text])||"");
       localStorage.setItem("ontoolsai_demo","1");setDemoUsed(true);
-    }catch (e3){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
+    }catch (e4){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
     setDemoRunning(false);
   };
 
@@ -285,27 +302,53 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
   const goHome=()=>{setStep("trade");setTrade(null);setModule(null);setToolId(null);setFields({});setOutput("");setTab("write");};
 
   const openCheckout=(selectedPlan)=>{
+    if(!checkoutEmail.trim()||!checkoutEmail.includes("@")){
+      setShowCheckoutEmail(true);
+      return;
+    }
+    // Save email so we can auto-check subscription on return
+    localStorage.setItem("ontoolsai_pending_email",checkoutEmail.trim().toLowerCase());
     const urls={
       pro:"https://ontoolsai.lemonsqueezy.com/checkout/buy/484e3e85-688b-4dba-9e7d-30356cf18767",
       business:"https://ontoolsai.lemonsqueezy.com/checkout/buy/ffd389d2-a278-4005-9023-54acdd81fe99"
     };
     window.open(urls[selectedPlan],"_blank");
+    // Poll for subscription after a short delay (user returns from checkout)
+    setTimeout(()=>autoCheckOnReturn(),8000);
   };
 
-  const verifyLicense=async()=>{
-    if(!activateKey.trim())return;
-    setActivateLoading(true);setActivateError("");
+  const autoCheckOnReturn=async()=>{
+    const pendingEmail=localStorage.getItem("ontoolsai_pending_email");
+    if(!pendingEmail||plan!=="free")return;
     try{
-      const res=await fetch("/.netlify/functions/ls-verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:activateKey.trim()})});
+      const res=await fetch("/.netlify/functions/ls-check-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:pendingEmail})});
       const data=await res.json();
       if(data.valid){
         setPlan(data.plan);
         localStorage.setItem("ontoolsai_plan",data.plan);
-        setShowActivate(false);setShowUpgrade(false);setActivateKey("");
-      }else{
-        setActivateError(data.error||"Invalid key — check it and try again.");
+        localStorage.setItem("ontoolsai_email",pendingEmail);
+        localStorage.removeItem("ontoolsai_pending_email");
+        setShowUpgrade(false);
       }
-    }catch (e4){setActivateError("Connection error. Try again.");}
+    }catch (e5){/* silent fail — user can use manual check */}
+  };
+
+  const checkByEmail=async(emailToCheck)=>{
+    const email=(emailToCheck||activateEmail).trim().toLowerCase();
+    if(!email||!email.includes("@"))return;
+    setActivateLoading(true);setActivateError("");
+    try{
+      const res=await fetch("/.netlify/functions/ls-check-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
+      const data=await res.json();
+      if(data.valid){
+        setPlan(data.plan);
+        localStorage.setItem("ontoolsai_plan",data.plan);
+        localStorage.setItem("ontoolsai_email",email);
+        setShowActivate(false);setShowUpgrade(false);setActivateEmail("");
+      }else{
+        setActivateError(data.error||"No active subscription found. Check your email and try again.");
+      }
+    }catch (e6){setActivateError("Connection error. Try again.");}
     setActivateLoading(false);
   };
 
@@ -537,7 +580,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _28 => _28.content, 'optionalAccess', _29 => _29[0], 'optionalAccess', _30 => _30.text])||"Your idea's in the pile. Good pile though.");
-                    }catch (e5){setFeedbackReply("That idea just landed. We'll get on it.");}
+                    }catch (e7){setFeedbackReply("That idea just landed. We'll get on it.");}
                     setFeedbackSent(true);setFeedbackLoading(false);
                   },
                   disabled: feedbackLoading||(!feedbackIdea.trim()&&feedbackTags.length===0),
@@ -837,6 +880,21 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
               )
             )
 
+            /* Email capture */
+            , React.createElement('div', { style: {marginBottom:12},}
+              , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginBottom:6,textAlign:"center"},}, "Enter your email to continue"    )
+              , React.createElement('input', {
+                value: checkoutEmail,
+                onChange: e=>setCheckoutEmail(e.target.value),
+                placeholder: "your@email.com",
+                type: "email",
+                style: {width:"100%",background:C.surface2,border:`0.5px solid ${showCheckoutEmail&&!checkoutEmail.includes("@")?C.red:C.border2}`,borderRadius:9,padding:"10px 12px",color:C.text,fontSize:13,outline:"none",boxSizing:"border-box",fontFamily:"inherit",textAlign:"center"},
+                onFocus: e=>{e.target.style.borderColor=C.amber;setShowCheckoutEmail(false);},
+                onBlur: e=>{e.target.style.borderColor=C.border2;},}
+              )
+              , showCheckoutEmail&&React.createElement('div', { style: {color:C.red,fontSize:11,marginTop:4,textAlign:"center"},}, "Please enter your email first"    )
+            )
+
             /* Pro */
             , React.createElement('div', { style: {...card(),padding:14,marginBottom:8,border:`1.5px solid ${C.amber}`,position:"relative",background:C.amberDim},}
               , React.createElement('div', { style: {position:"absolute",top:-10,right:12,background:C.amber,color:"#000",fontSize:10,fontWeight:900,padding:"2px 10px",borderRadius:10},}, "MOST POPULAR" )
@@ -874,7 +932,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
 
             , React.createElement('div', { style: {textAlign:"center",fontSize:11,color:C.subtle,marginBottom:6},}, "Cancel anytime · No contracts · Your messages are always yours"          )
             , React.createElement('div', { style: {textAlign:"center",marginBottom:10},}
-              , React.createElement('button', { onClick: ()=>setShowActivate(true), style: {background:"none",border:"none",color:C.amber,fontSize:12,cursor:"pointer",textDecoration:"underline"},}, "Already paid? Enter your license key →"      )
+              , React.createElement('button', { onClick: ()=>setShowActivate(true), style: {background:"none",border:"none",color:C.amber,fontSize:12,cursor:"pointer",textDecoration:"underline"},}, "Already paid? Click here to unlock →"      )
             )
             , React.createElement('button', { onClick: ()=>setShowUpgrade(false), style: {display:"block",margin:"0 auto",background:"none",border:"none",color:C.subtle,fontSize:12,cursor:"pointer"},}, "Maybe later" )
           )
@@ -926,34 +984,36 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
         )
       )
 
-      /* ── ACTIVATE LICENSE MODAL ────────────────────────────────────────────── */
+      /* ── ACTIVATE BY EMAIL MODAL ──────────────────────────────────────────── */
       , showActivate&&(
         React.createElement('div', { style: {position:"fixed",inset:0,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:300,padding:"0 16px 20px"}, onClick: ()=>setShowActivate(false),}
           , React.createElement('div', { style: {...card(),padding:22,maxWidth:440,width:"100%",border:`0.5px solid ${C.border2}`}, onClick: e=>e.stopPropagation(),}
             , React.createElement('div', { style: {marginBottom:16},}
-              , React.createElement('div', { style: {fontSize:18,fontWeight:900},}, "🔑 Activate your plan"   )
-              , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:4},}, "After payment, Lemon Squeezy emails you a license key. Paste it below to unlock your plan."               )
+              , React.createElement('div', { style: {fontSize:18,fontWeight:900},}, "✅ Unlock your plan"   )
+              , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:4},}, "Enter the email you used to purchase — we'll check your subscription automatically."            )
             )
             , React.createElement('input', {
-              value: activateKey,
-              onChange: e=>{setActivateKey(e.target.value);setActivateError("");},
-              placeholder: "Paste your license key here"    ,
+              value: activateEmail,
+              onChange: e=>{setActivateEmail(e.target.value);setActivateError("");},
+              placeholder: "your@email.com",
+              type: "email",
               style: {width:"100%",background:C.surface2,border:`0.5px solid ${activateError?C.red:C.border2}`,borderRadius:9,padding:"12px",color:C.text,fontSize:13,outline:"none",boxSizing:"border-box",fontFamily:"inherit",marginBottom:8},
               onFocus: e=>{e.target.style.borderColor=C.amber;},
               onBlur: e=>{e.target.style.borderColor=activateError?C.red:C.border2;},}
             )
             , activateError&&React.createElement('div', { style: {color:C.red,fontSize:12,marginBottom:10},}, activateError)
             , React.createElement('div', { style: {display:"flex",gap:8,marginTop:4},}
-              , React.createElement('button', { onClick: verifyLicense, disabled: activateLoading||!activateKey.trim(),
-                style: {flex:2,background:activateLoading||!activateKey.trim()?C.surface3:C.amber,border:"none",borderRadius:10,padding:"12px",color:activateLoading||!activateKey.trim()?"#555":"#000",fontWeight:900,fontSize:14,cursor:activateLoading||!activateKey.trim()?"default":"pointer"},}
-                , activateLoading?"Checking...":"Activate →"
+              , React.createElement('button', { onClick: ()=>checkByEmail(),
+                disabled: activateLoading||!activateEmail.includes("@"),
+                style: {flex:2,background:activateLoading||!activateEmail.includes("@")?C.surface3:C.amber,border:"none",borderRadius:10,padding:"12px",color:activateLoading||!activateEmail.includes("@")?"#555":"#000",fontWeight:900,fontSize:14,cursor:activateLoading||!activateEmail.includes("@")?"default":"pointer"},}
+                , activateLoading?"Checking...":"Unlock my plan →"
               )
               , React.createElement('button', { onClick: ()=>setShowActivate(false),
                 style: {flex:1,background:C.surface2,border:`0.5px solid ${C.border2}`,borderRadius:10,padding:"12px",color:C.muted,fontWeight:600,fontSize:13,cursor:"pointer"},}, "Cancel"
 
               )
             )
-            , React.createElement('div', { style: {marginTop:12,fontSize:11,color:C.subtle,textAlign:"center"},}, "Can't find your key? Check your email from Lemon Squeezy after purchase."           )
+            , React.createElement('div', { style: {marginTop:12,fontSize:11,color:C.subtle,textAlign:"center"},}, "Use the same email you paid with. Plan unlocks instantly."         )
           )
         )
       )
