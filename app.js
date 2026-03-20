@@ -300,9 +300,21 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
   const saveBV=()=>{setBv(bvDraft);localStorage.setItem("ontoolsai_bv",JSON.stringify(bvDraft));setShowBV(false);};
   const copyReferral=()=>{
     const msg="Hey — just found this tool called OnToolsAI that writes your customer messages, review replies and invoice reminders in seconds. Free to try: ontoolsai.com";
-    navigator.clipboard.writeText(msg);
-    setReferralCopied(true);
-    setTimeout(()=>setReferralCopied(false),2500);
+    const fallback=()=>{
+      const ta=document.createElement("textarea");
+      ta.value=msg;ta.style.position="fixed";ta.style.opacity="0";
+      document.body.appendChild(ta);ta.focus();ta.select();
+      try{document.execCommand("copy");}catch (e5){}
+      document.body.removeChild(ta);
+      setReferralCopied(true);
+      setTimeout(()=>setReferralCopied(false),2500);
+    };
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(msg).then(()=>{
+        setReferralCopied(true);
+        setTimeout(()=>setReferralCopied(false),2500);
+      }).catch(fallback);
+    }else{fallback();}
   };
   const resetToFields=()=>{setStep("fields");setOutput("");setCopied(false);};
   const resetToModules=()=>{setStep("module");setToolId(null);setFields({});setOutput("");};
@@ -337,7 +349,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
         localStorage.removeItem("ontoolsai_pending_email");
         setShowUpgrade(false);
       }
-    }catch (e5){/* silent fail — user can use manual check */}
+    }catch (e6){/* silent fail — user can use manual check */}
   };
 
   const checkByEmail=async(emailToCheck)=>{
@@ -355,7 +367,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       }else{
         setActivateError(data.error||"No active subscription found. Check your email and try again.");
       }
-    }catch (e6){setActivateError("Connection error. Try again.");}
+    }catch (e7){setActivateError("Connection error. Try again.");}
     setActivateLoading(false);
   };
 
@@ -609,7 +621,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _28 => _28.content, 'optionalAccess', _29 => _29[0], 'optionalAccess', _30 => _30.text])||"Your idea's in the pile. Good pile though.");
-                    }catch (e7){setFeedbackReply("That idea just landed. We'll get on it.");}
+                    }catch (e8){setFeedbackReply("That idea just landed. We'll get on it.");}
                     setFeedbackSent(true);setFeedbackLoading(false);
                   },
                   disabled: feedbackLoading||(!feedbackIdea.trim()&&feedbackTags.length===0),
@@ -1069,6 +1081,6 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
 } OnToolsAI;
 
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root=ReactDOM.createRoot(document.getElementById("root"));
 root.render(React.createElement(OnToolsAI));
 document.getElementById("loader")?.remove();
