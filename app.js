@@ -231,7 +231,29 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
     if(saved){const p=JSON.parse(saved);setBv(p);setBvDraft(p);}
     setDemoUsed(!!localStorage.getItem("ontoolsai_demo"));
     const savedPlan=localStorage.getItem("ontoolsai_plan");
+    const savedEmail=localStorage.getItem("ontoolsai_email");
     if(savedPlan&&savedPlan!=="free")setPlan(savedPlan);
+
+    // Re-validate subscription on every session start (catches cancellations)
+    if(savedEmail&&savedPlan&&savedPlan!=="free"){
+      setTimeout(async()=>{
+        try{
+          const res=await fetch("/.netlify/functions/ls-check-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:savedEmail})});
+          const data=await res.json();
+          if(!data.valid){
+            // Subscription cancelled or expired — revoke access
+            setPlan("free");
+            localStorage.setItem("ontoolsai_plan","free");
+            localStorage.removeItem("ontoolsai_email");
+          } else if(data.plan!==savedPlan){
+            // Plan changed (e.g. upgraded from pro to business)
+            setPlan(data.plan);
+            localStorage.setItem("ontoolsai_plan",data.plan);
+          }
+        }catch (e2){/* silent — keep existing plan on network error */}
+      },3000);
+    }
+
     // Auto-check if user is returning from checkout
     const pendingEmail=localStorage.getItem("ontoolsai_pending_email");
     if(pendingEmail&&(!savedPlan||savedPlan==="free")){
@@ -245,7 +267,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
             localStorage.setItem("ontoolsai_email",pendingEmail);
             localStorage.removeItem("ontoolsai_pending_email");
           }
-        }catch (e2){/* silent */}
+        }catch (e3){/* silent */}
       },2000);
     }
   },[]);
@@ -273,7 +295,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       if(!isPro&&!bv)text+="\n\n---\n✍️ Written in seconds with OnToolsAI — the free AI message tool built for trade businesses. Try it: ontoolsai.com";
       setOutput(text);
       const n=usage+1;setUsage(n);localStorage.setItem("ontoolsai_usage",n.toString());
-    }catch (e3){setOutput("Connection error. Please check your internet and try again.");}
+    }catch (e4){setOutput("Connection error. Please check your internet and try again.");}
     setLoading(false);
   };
 
@@ -291,7 +313,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       const data=await res.json();
       setDemoOutput(_optionalChain([data, 'access', _24 => _24.content, 'optionalAccess', _25 => _25[0], 'optionalAccess', _26 => _26.text])||"");
       localStorage.setItem("ontoolsai_demo","1");setDemoUsed(true);
-    }catch (e4){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
+    }catch (e5){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
     setDemoRunning(false);
   };
 
@@ -330,7 +352,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
         localStorage.removeItem("ontoolsai_pending_email");
         setShowUpgrade(false);
       }
-    }catch (e5){/* silent fail — user can use manual check */}
+    }catch (e6){/* silent fail — user can use manual check */}
   };
 
   const checkByEmail=async(emailToCheck)=>{
@@ -348,7 +370,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       }else{
         setActivateError(data.error||"No active subscription found. Check your email and try again.");
       }
-    }catch (e6){setActivateError("Connection error. Try again.");}
+    }catch (e7){setActivateError("Connection error. Try again.");}
     setActivateLoading(false);
   };
 
@@ -580,7 +602,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _28 => _28.content, 'optionalAccess', _29 => _29[0], 'optionalAccess', _30 => _30.text])||"Your idea's in the pile. Good pile though.");
-                    }catch (e7){setFeedbackReply("That idea just landed. We'll get on it.");}
+                    }catch (e8){setFeedbackReply("That idea just landed. We'll get on it.");}
                     setFeedbackSent(true);setFeedbackLoading(false);
                   },
                   disabled: feedbackLoading||(!feedbackIdea.trim()&&feedbackTags.length===0),
@@ -669,10 +691,10 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 , React.createElement('div', { onClick: ()=>isBusiness?setShowBV(true):setShowUpgrade(true), style: {...card(),padding:"12px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,border:`0.5px solid ${isBusiness&&bv?C.amberBorder:C.border}`},}
                   , React.createElement('span', { style: {fontSize:20},}, "🎨")
                   , React.createElement('div', null
-                    , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:isBusiness&&bv?C.amber:"#CCC"},}, isBusiness?(bv?`Brand Voice: ${bv.name}`:"Set Your Brand Voice"):"🔒 Brand Voice")
-                    , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, isBusiness?(bv?"Every message sounds like you — watermark removed":"Make outputs sound like your business, not generic AI"):"Breakfast plan — makes every message sound like you")
+                    , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:bv?C.amber:"#CCC"},}, bv?`Brand Voice: ${bv.name}`:"Set Your Brand Voice")
+                    , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, bv?"Every message sounds like you — watermark removed":"Make outputs sound like your business, not generic AI")
                   )
-                  , React.createElement('div', { style: {marginLeft:"auto",fontSize:12,color:isBusiness&&bv?C.amber:C.subtle},}, isBusiness?(bv?"Edit →":"Set up →"):"Upgrade →")
+                  , React.createElement('div', { style: {marginLeft:"auto",fontSize:12,color:bv?C.amber:C.subtle},}, bv?"Edit →":"Set up →")
                 )
               )
             )
@@ -772,9 +794,9 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 )
 
                 /* Generate Button */
-                , !isPro&&!bv&&(
+                , !bv&&(
                   React.createElement('div', { style: {fontSize:11,color:C.subtle,marginBottom:8,textAlign:"center"},}, "Free messages include a OnToolsAI footer. "
-                          , React.createElement('span', { onClick: ()=>setShowUpgrade(true), style: {color:C.amber,cursor:"pointer"},}, "Remove it — upgrade to Pro or Business →"        )
+                          , React.createElement('span', { onClick: ()=>setShowBV(true), style: {color:C.amber,cursor:"pointer"},}, "Remove it with Brand Voice →"     )
                   )
                 )
                 , React.createElement('button', { onClick: ()=>generate(),
@@ -973,15 +995,11 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 , React.createElement('div', { style: {width:12,height:12,background:"#FFF",borderRadius:6,position:"absolute",top:3,left:bvDraft.humour?18:3,transition:"left 0.2s"},})
               )
             )
-            , !isBusiness&&(
-              React.createElement('div', { style: {padding:"12px 14px",background:C.amberDim,borderRadius:10,marginBottom:14,border:`0.5px solid ${C.amberBorder}`},}
-                , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:C.amber,marginBottom:4},}, "🍳 Breakfast plan feature"   )
-                , React.createElement('div', { style: {fontSize:12,color:"#AAA",lineHeight:1.5,marginBottom:10},}, "Brand Voice is included in the $17.99/mo Breakfast plan. Every message sounds like you — no watermark, no generic AI tone."                    )
-                , React.createElement('button', { onClick: ()=>{setShowBV(false);setShowUpgrade(true);}, style: {width:"100%",background:C.amber,border:"none",borderRadius:8,padding:"10px",color:"#000",fontWeight:900,fontSize:13,cursor:"pointer"},}, "Unlock with Breakfast plan →"    )
-              )
+            , React.createElement('div', { style: {padding:"10px 12px",background:C.surface2,borderRadius:10,marginBottom:14,fontSize:12,color:C.subtle,lineHeight:1.5},}, "🍳 "
+               , React.createElement('strong', { style: {color:"#888"},}, "Breakfast plan feature"  ), " — Brand Voice is included in the $17.99/mo plan. Save your settings now and they'll activate when you upgrade."
             )
             , React.createElement('div', { style: {display:"flex",gap:8},}
-              , React.createElement('button', { onClick: isBusiness?saveBV:()=>{setShowBV(false);setShowUpgrade(true);}, style: {flex:2,background:isBusiness?C.amber:C.surface3,border:`0.5px solid ${isBusiness?"transparent":C.border2}`,borderRadius:10,padding:"12px",color:isBusiness?"#000":"#555",fontWeight:900,fontSize:14,cursor:"pointer"},}, isBusiness?"Save Brand Voice":"Unlock to Save →")
+              , React.createElement('button', { onClick: saveBV, style: {flex:2,background:C.amber,border:"none",borderRadius:10,padding:"12px",color:"#000",fontWeight:900,fontSize:14,cursor:"pointer"},}, "Save Brand Voice"  )
               , React.createElement('button', { onClick: ()=>setShowBV(false), style: {flex:1,background:C.surface2,border:`0.5px solid ${C.border2}`,borderRadius:10,padding:"12px",color:C.muted,fontWeight:600,fontSize:13,cursor:"pointer"},}, "Cancel")
             )
           )
