@@ -1,0 +1,23 @@
+const crypto = require('crypto');
+
+exports.handler = async (event) => {
+  const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET;
+  const signature = event.headers['x-signature'];
+  const hash = crypto
+    .createHmac('sha256', secret)
+    .update(event.body)
+    .digest('hex');
+
+  if (hash !== signature) {
+    return { statusCode: 401, body: 'Invalid signature' };
+  }
+
+  const payload = JSON.parse(event.body);
+  const eventName = payload.meta.event_name;
+  const email = payload.data.attributes.user_email;
+  const status = payload.data.attributes.status;
+
+  console.log(`Event: ${eventName} | Email: ${email} | Status: ${status}`);
+
+  return { statusCode: 200, body: 'OK' };
+};
