@@ -270,7 +270,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
       const data=await res.json();
       let text=_optionalChain([data, 'access', _20 => _20.content, 'optionalAccess', _21 => _21[0], 'optionalAccess', _22 => _22.text])||"Something went wrong. Please try again.";
-      if(!isPro&&!bv)text+="\n\n— Sorted with OnToolsAI (ontoolsai.com)";
+      if(!isPro&&!bv)text+="\n\n---\n✍️ Written in seconds with OnToolsAI — the free AI message tool built for trade businesses. Try it: ontoolsai.com";
       setOutput(text);
       const n=usage+1;setUsage(n);localStorage.setItem("ontoolsai_usage",n.toString());
     }catch (e3){setOutput("Connection error. Please check your internet and try again.");}
