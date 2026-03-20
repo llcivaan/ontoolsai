@@ -666,13 +666,13 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                   ))
                 )
                 /* Brand Voice CTA */
-                , React.createElement('div', { onClick: ()=>setShowBV(true), style: {...card(),padding:"12px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,border:`0.5px solid ${bv?C.amberBorder:C.border}`},}
+                , React.createElement('div', { onClick: ()=>isBusiness?setShowBV(true):setShowUpgrade(true), style: {...card(),padding:"12px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,border:`0.5px solid ${isBusiness&&bv?C.amberBorder:C.border}`},}
                   , React.createElement('span', { style: {fontSize:20},}, "🎨")
                   , React.createElement('div', null
-                    , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:bv?C.amber:"#CCC"},}, bv?`Brand Voice: ${bv.name}`:"Set Your Brand Voice")
-                    , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, bv?"Every message sounds like you — watermark removed":"Make outputs sound like your business, not generic AI")
+                    , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:isBusiness&&bv?C.amber:"#CCC"},}, isBusiness?(bv?`Brand Voice: ${bv.name}`:"Set Your Brand Voice"):"🔒 Brand Voice")
+                    , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, isBusiness?(bv?"Every message sounds like you — watermark removed":"Make outputs sound like your business, not generic AI"):"Breakfast plan — makes every message sound like you")
                   )
-                  , React.createElement('div', { style: {marginLeft:"auto",fontSize:12,color:bv?C.amber:C.subtle},}, bv?"Edit →":"Set up →")
+                  , React.createElement('div', { style: {marginLeft:"auto",fontSize:12,color:isBusiness&&bv?C.amber:C.subtle},}, isBusiness?(bv?"Edit →":"Set up →"):"Upgrade →")
                 )
               )
             )
@@ -772,9 +772,9 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 )
 
                 /* Generate Button */
-                , !bv&&(
+                , !isPro&&!bv&&(
                   React.createElement('div', { style: {fontSize:11,color:C.subtle,marginBottom:8,textAlign:"center"},}, "Free messages include a OnToolsAI footer. "
-                          , React.createElement('span', { onClick: ()=>setShowBV(true), style: {color:C.amber,cursor:"pointer"},}, "Remove it with Brand Voice →"     )
+                          , React.createElement('span', { onClick: ()=>setShowUpgrade(true), style: {color:C.amber,cursor:"pointer"},}, "Remove it — upgrade to Pro or Business →"        )
                   )
                 )
                 , React.createElement('button', { onClick: ()=>generate(),
@@ -973,11 +973,15 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 , React.createElement('div', { style: {width:12,height:12,background:"#FFF",borderRadius:6,position:"absolute",top:3,left:bvDraft.humour?18:3,transition:"left 0.2s"},})
               )
             )
-            , React.createElement('div', { style: {padding:"10px 12px",background:C.surface2,borderRadius:10,marginBottom:14,fontSize:12,color:C.subtle,lineHeight:1.5},}, "🍳 "
-               , React.createElement('strong', { style: {color:"#888"},}, "Breakfast plan feature"  ), " — Brand Voice is included in the $17.99/mo plan. Save your settings now and they'll activate when you upgrade."
+            , !isBusiness&&(
+              React.createElement('div', { style: {padding:"12px 14px",background:C.amberDim,borderRadius:10,marginBottom:14,border:`0.5px solid ${C.amberBorder}`},}
+                , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:C.amber,marginBottom:4},}, "🍳 Breakfast plan feature"   )
+                , React.createElement('div', { style: {fontSize:12,color:"#AAA",lineHeight:1.5,marginBottom:10},}, "Brand Voice is included in the $17.99/mo Breakfast plan. Every message sounds like you — no watermark, no generic AI tone."                    )
+                , React.createElement('button', { onClick: ()=>{setShowBV(false);setShowUpgrade(true);}, style: {width:"100%",background:C.amber,border:"none",borderRadius:8,padding:"10px",color:"#000",fontWeight:900,fontSize:13,cursor:"pointer"},}, "Unlock with Breakfast plan →"    )
+              )
             )
             , React.createElement('div', { style: {display:"flex",gap:8},}
-              , React.createElement('button', { onClick: saveBV, style: {flex:2,background:C.amber,border:"none",borderRadius:10,padding:"12px",color:"#000",fontWeight:900,fontSize:14,cursor:"pointer"},}, "Save Brand Voice"  )
+              , React.createElement('button', { onClick: isBusiness?saveBV:()=>{setShowBV(false);setShowUpgrade(true);}, style: {flex:2,background:isBusiness?C.amber:C.surface3,border:`0.5px solid ${isBusiness?"transparent":C.border2}`,borderRadius:10,padding:"12px",color:isBusiness?"#000":"#555",fontWeight:900,fontSize:14,cursor:"pointer"},}, isBusiness?"Save Brand Voice":"Unlock to Save →")
               , React.createElement('button', { onClick: ()=>setShowBV(false), style: {flex:1,background:C.surface2,border:`0.5px solid ${C.border2}`,borderRadius:10,padding:"12px",color:C.muted,fontWeight:600,fontSize:13,cursor:"pointer"},}, "Cancel")
             )
           )
