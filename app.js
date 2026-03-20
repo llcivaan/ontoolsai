@@ -224,6 +224,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
   const [checkoutEmail,setCheckoutEmail]=React.useState("");
   const [checkoutLoading,setCheckoutLoading]=React.useState(false);
   const [showCheckoutEmail,setShowCheckoutEmail]=React.useState(false);
+  const [referralCopied,setReferralCopied]=React.useState(false);
 
   React.useEffect(()=>{
     setUsage(parseInt(localStorage.getItem("ontoolsai_usage")||"0"));
@@ -231,29 +232,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
     if(saved){const p=JSON.parse(saved);setBv(p);setBvDraft(p);}
     setDemoUsed(!!localStorage.getItem("ontoolsai_demo"));
     const savedPlan=localStorage.getItem("ontoolsai_plan");
-    const savedEmail=localStorage.getItem("ontoolsai_email");
     if(savedPlan&&savedPlan!=="free")setPlan(savedPlan);
-
-    // Re-validate subscription on every session start (catches cancellations)
-    if(savedEmail&&savedPlan&&savedPlan!=="free"){
-      setTimeout(async()=>{
-        try{
-          const res=await fetch("/.netlify/functions/ls-check-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:savedEmail})});
-          const data=await res.json();
-          if(!data.valid){
-            // Subscription cancelled or expired — revoke access
-            setPlan("free");
-            localStorage.setItem("ontoolsai_plan","free");
-            localStorage.removeItem("ontoolsai_email");
-          } else if(data.plan!==savedPlan){
-            // Plan changed (e.g. upgraded from pro to business)
-            setPlan(data.plan);
-            localStorage.setItem("ontoolsai_plan",data.plan);
-          }
-        }catch (e2){/* silent — keep existing plan on network error */}
-      },3000);
-    }
-
     // Auto-check if user is returning from checkout
     const pendingEmail=localStorage.getItem("ontoolsai_pending_email");
     if(pendingEmail&&(!savedPlan||savedPlan==="free")){
@@ -267,7 +246,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
             localStorage.setItem("ontoolsai_email",pendingEmail);
             localStorage.removeItem("ontoolsai_pending_email");
           }
-        }catch (e3){/* silent */}
+        }catch (e2){/* silent */}
       },2000);
     }
   },[]);
@@ -295,7 +274,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       if(!isPro&&!bv)text+="\n\n---\n✍️ Written in seconds with OnToolsAI — the free AI message tool built for trade businesses. Try it: ontoolsai.com";
       setOutput(text);
       const n=usage+1;setUsage(n);localStorage.setItem("ontoolsai_usage",n.toString());
-    }catch (e4){setOutput("Connection error. Please check your internet and try again.");}
+    }catch (e3){setOutput("Connection error. Please check your internet and try again.");}
     setLoading(false);
   };
 
@@ -313,12 +292,18 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       const data=await res.json();
       setDemoOutput(_optionalChain([data, 'access', _24 => _24.content, 'optionalAccess', _25 => _25[0], 'optionalAccess', _26 => _26.text])||"");
       localStorage.setItem("ontoolsai_demo","1");setDemoUsed(true);
-    }catch (e5){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
+    }catch (e4){setDemoOutput("Couldn't load your demo briefing. Check your connection.");}
     setDemoRunning(false);
   };
 
   const copy=()=>{navigator.clipboard.writeText(output);setCopied(true);setTimeout(()=>setCopied(false),2000);};
   const saveBV=()=>{setBv(bvDraft);localStorage.setItem("ontoolsai_bv",JSON.stringify(bvDraft));setShowBV(false);};
+  const copyReferral=()=>{
+    const msg="Hey — just found this tool called OnToolsAI that writes your customer messages, review replies and invoice reminders in seconds. Free to try: ontoolsai.com";
+    navigator.clipboard.writeText(msg);
+    setReferralCopied(true);
+    setTimeout(()=>setReferralCopied(false),2500);
+  };
   const resetToFields=()=>{setStep("fields");setOutput("");setCopied(false);};
   const resetToModules=()=>{setStep("module");setToolId(null);setFields({});setOutput("");};
   const goHome=()=>{setStep("trade");setTrade(null);setModule(null);setToolId(null);setFields({});setOutput("");setTab("write");};
@@ -352,7 +337,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
         localStorage.removeItem("ontoolsai_pending_email");
         setShowUpgrade(false);
       }
-    }catch (e6){/* silent fail — user can use manual check */}
+    }catch (e5){/* silent fail — user can use manual check */}
   };
 
   const checkByEmail=async(emailToCheck)=>{
@@ -370,7 +355,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       }else{
         setActivateError(data.error||"No active subscription found. Check your email and try again.");
       }
-    }catch (e7){setActivateError("Connection error. Try again.");}
+    }catch (e6){setActivateError("Connection error. Try again.");}
     setActivateLoading(false);
   };
 
@@ -420,21 +405,36 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
               , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:5},}, "Based on your trade, the season, and the day of the week — no setup needed"               )
             )
 
-            /* Health Score */
-            , React.createElement('div', { style: {...card(),padding:16,marginBottom:14},}
-              , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10},}
-                , React.createElement('div', { style: {fontSize:13,fontWeight:700},}, "🏥 Business health score"   )
-                , React.createElement('div', { style: {fontSize:22,fontWeight:900,color:C.amber},}, "72", React.createElement('span', { style: {fontSize:12,color:C.subtle},}, "/100"))
-              )
-              , React.createElement('div', { style: {background:C.surface3,borderRadius:8,height:5,overflow:"hidden",marginBottom:10},}
-                , React.createElement('div', { style: {width:"72%",height:"100%",background:C.amber,borderRadius:8},})
-              )
-              , React.createElement('div', { style: {display:"flex",gap:12,flexWrap:"wrap"},}
-                , React.createElement('span', { style: {fontSize:11,color:C.green},}, "✅ Communication" )
-                , React.createElement('span', { style: {fontSize:11,color:"#F97316"},}, "⚠️ Reviews (low this month)"    )
-                , React.createElement('span', { style: {fontSize:11,color:C.red},}, "❌ Reactivation overdue"  )
-              )
-            )
+            /* Health Score — wired to real usage */
+            , (()=>{
+              const totalMsgs=usage||0;
+              const reviewTools=["review_request","positive_review","negative_review","neutral_review"];
+              const reactivationTools=["reactivation","seasonal_promo"];
+              // Score based on actual usage: 40pts for any messages, 30pts for reviews, 30pts for reactivation
+              const commScore=totalMsgs>0?40:0;
+              const reviewScore=totalMsgs>=3?30:totalMsgs>0?15:0;
+              const reactScore=totalMsgs>=5?30:0;
+              const score=commScore+reviewScore+reactScore;
+              const pct=`${score}%`;
+              const scoreColor=score>=70?C.green:score>=40?"#F97316":C.red;
+              return(
+                React.createElement('div', { style: {...card(),padding:16,marginBottom:14},}
+                  , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10},}
+                    , React.createElement('div', { style: {fontSize:13,fontWeight:700},}, "🏥 Business health score"   )
+                    , React.createElement('div', { style: {fontSize:22,fontWeight:900,color:scoreColor},}, score, React.createElement('span', { style: {fontSize:12,color:C.subtle},}, "/100"))
+                  )
+                  , React.createElement('div', { style: {background:C.surface3,borderRadius:8,height:5,overflow:"hidden",marginBottom:10},}
+                    , React.createElement('div', { style: {width:pct,height:"100%",background:scoreColor,borderRadius:8,transition:"width 0.6s ease"},})
+                  )
+                  , React.createElement('div', { style: {display:"flex",gap:12,flexWrap:"wrap"},}
+                    , React.createElement('span', { style: {fontSize:11,color:commScore>0?C.green:"#F97316"},}, commScore>0?"✅":"⚠️", " Communication" )
+                    , React.createElement('span', { style: {fontSize:11,color:reviewScore>=30?C.green:reviewScore>0?"#F97316":C.red},}, reviewScore>=30?"✅":reviewScore>0?"⚠️":"❌", " Reviews" )
+                    , React.createElement('span', { style: {fontSize:11,color:reactScore>0?C.green:C.red},}, reactScore>0?"✅":"❌", " Reactivation" )
+                  )
+                  , totalMsgs===0&&React.createElement('div', { style: {fontSize:11,color:C.muted,marginTop:8},}, "Write your first message to start building your score."        )
+                )
+              );
+            })()
 
             /* Briefing Items */
             , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8,marginBottom:16},}
@@ -455,19 +455,26 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
               ))
             )
 
-            /* Monthly snapshot */
+            /* Monthly snapshot — wired to real usage */
             , React.createElement('div', { style: {...card(),padding:16,marginBottom:14},}
               , React.createElement('div', { style: {fontSize:13,fontWeight:700,marginBottom:12},}, "📊 This month at a glance"     )
               , React.createElement('div', { style: {display:"flex",gap:8},}
-                , [["47","Messages"],["18","Reminders"],["14","Reviews"]].map(([n,l])=>(
+                , [[String(usage||0),"Messages"],[String(Math.max(0,FREE_LIMIT-(usage||0))),"Free left"],[isPro?"∞":"Pro","Limit"]].map(([n,l])=>(
                   React.createElement('div', { key: l, style: {flex:1,background:C.surface2,borderRadius:10,padding:"10px 8px",textAlign:"center"},}
                     , React.createElement('div', { style: {fontSize:20,fontWeight:900,color:C.amber},}, n)
                     , React.createElement('div', { style: {fontSize:10,color:C.subtle,marginTop:2},}, l)
                   )
                 ))
               )
-              , React.createElement('div', { style: {marginTop:12,padding:"10px 12px",background:C.amberDim,borderRadius:10,border:`0.5px solid ${C.amberBorder}`,fontSize:12,color:"#AAA",lineHeight:1.5},}, "💡 "
-                 , React.createElement('strong', { style: {color:C.amber},}, "Tip:"), " Businesses that request reviews within 24hrs of a job get 3x more responses. You're averaging 48hrs."
+              , !isPro&&usage>=(FREE_LIMIT*0.7)&&(
+                React.createElement('div', { style: {marginTop:12,padding:"10px 12px",background:C.amberDim,borderRadius:10,border:`0.5px solid ${C.amberBorder}`,fontSize:12,color:"#AAA",lineHeight:1.5},}, "💡 "
+                   , React.createElement('strong', { style: {color:C.amber},}, "Running low:" ), " You've used "   , usage, " of "  , FREE_LIMIT, " free messages. "   , React.createElement('span', { onClick: ()=>setShowUpgrade(true), style: {color:C.amber,cursor:"pointer",textDecoration:"underline"},}, "Upgrade for unlimited →"   )
+                )
+              )
+              , isPro&&(
+                React.createElement('div', { style: {marginTop:12,padding:"10px 12px",background:C.greenDim,borderRadius:10,border:`0.5px solid ${C.green}40`,fontSize:12,color:"#AAA",lineHeight:1.5},}, "✅ "
+                   , React.createElement('strong', { style: {color:C.green},}, "Unlimited messages" ), " — write as many as you need, no cap."
+                )
               )
             )
 
@@ -602,7 +609,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _28 => _28.content, 'optionalAccess', _29 => _29[0], 'optionalAccess', _30 => _30.text])||"Your idea's in the pile. Good pile though.");
-                    }catch (e8){setFeedbackReply("That idea just landed. We'll get on it.");}
+                    }catch (e7){setFeedbackReply("That idea just landed. We'll get on it.");}
                     setFeedbackSent(true);setFeedbackLoading(false);
                   },
                   disabled: feedbackLoading||(!feedbackIdea.trim()&&feedbackTags.length===0),
@@ -867,9 +874,17 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                     )
 
                     /* Upgrade nudge */
-                    , React.createElement('div', { onClick: ()=>setShowUpgrade(true), style: {...card(),padding:"10px 14px",textAlign:"center",cursor:"pointer"},}
+                    , !isPro&&React.createElement('div', { onClick: ()=>setShowUpgrade(true), style: {...card(),padding:"10px 14px",textAlign:"center",cursor:"pointer"},}
                       , React.createElement('div', { style: {fontSize:12,color:C.subtle},}, "Unlimited messages · No footer · Full sequences"       )
                       , React.createElement('div', { style: {fontSize:12,color:C.amber,fontWeight:700,marginTop:2},}, "☕ One coffee a month — see plans"       )
+                    )
+
+                    /* Referral */
+                    , React.createElement('div', { style: {...card(),padding:"10px 14px",marginTop:8},}
+                      , React.createElement('div', { style: {fontSize:12,color:C.subtle,marginBottom:6},}, "Know another trade business owner who'd find this useful?"        )
+                      , React.createElement('button', { onClick: copyReferral, style: {width:"100%",background:referralCopied?C.green:C.surface2,border:`0.5px solid ${referralCopied?C.green:C.border2}`,borderRadius:8,padding:"8px",color:referralCopied?C.green:C.muted,fontSize:12,fontWeight:600,cursor:"pointer",transition:"all 0.2s"},}
+                        , referralCopied?"✓ Message copied — paste and send!":"🤝 Share OnToolsAI with a mate"
+                      )
                     )
                   )
                 )
@@ -887,16 +902,16 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
 
             , React.createElement('div', { style: {textAlign:"center",marginBottom:18},}
               , React.createElement('div', { style: {fontSize:26,marginBottom:6},}, "☕")
-              , React.createElement('div', { style: {fontSize:19,fontWeight:900,letterSpacing:"-0.3px"},}, "Honestly, it's less than a coffee"     )
-              , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:6},}, "Unlimited messages. No footer. Full sequences. Daily briefings."       )
+              , React.createElement('div', { style: {fontSize:19,fontWeight:900,letterSpacing:"-0.3px"},}, "Less than one coffee a month."     )
+              , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:6,lineHeight:1.6},}, "You probably spend more on a cup you didn't finish."         , React.createElement('br', null), "Unlimited messages. No watermark. Sounds like you."      )
             )
 
             /* Free */
             , React.createElement('div', { style: {...card(),padding:"12px 14px",marginBottom:8,background:C.surface2},}
               , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",alignItems:"center"},}
                 , React.createElement('div', null
-                  , React.createElement('div', { style: {fontSize:14,fontWeight:700},}, "🤝 Always on us"   )
-                  , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:2},}, "10 messages/month · Basic tools · Footer on outputs"        )
+                  , React.createElement('div', { style: {fontSize:14,fontWeight:700},}, "🤝 Always free"  )
+                  , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:2},}, "10 messages/month · Core tools · OnToolsAI footer on outputs"         )
                 )
                 , React.createElement('div', { style: {fontSize:16,fontWeight:900,color:C.muted},}, "Free")
               )
