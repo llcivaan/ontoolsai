@@ -25,12 +25,12 @@
 
 [[redirects]]
   from = "/app"
-  to = "/index.html"
+  to = "/app-shell.html"
   status = 200
 
 [[redirects]]
   from = "/app/*"
-  to = "/index.html"
+  to = "/app-shell.html"
   status = 200
 
 [[redirects]]
