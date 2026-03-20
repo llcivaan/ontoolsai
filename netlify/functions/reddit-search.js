@@ -1,12 +1,21 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event) => {
-  const { sub, q, limit = '25' } = event.queryStringParameters || {};
+  const cors = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+  };
+
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: cors, body: "" };
+  }
+
+  const { sub, q, limit = "25" } = event.queryStringParameters || {};
 
   if (!sub || !q) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Missing required params: sub, q' }),
+      headers: { ...cors, "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Missing required params: sub, q" }),
     };
   }
 
@@ -15,26 +24,27 @@ exports.handler = async (event) => {
   try {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'OnToolsAI/1.0 (lead monitor; contact: llcivaan@gmail.com)',
-        'Accept': 'application/json',
+        "User-Agent": "OnToolsAI/1.0 (lead monitor; contact: llcivaan@gmail.com)",
+        "Accept": "application/json",
       },
     });
 
     if (!response.ok) {
       return {
         statusCode: response.status,
+        headers: { ...cors, "Content-Type": "application/json" },
         body: JSON.stringify({ error: `Reddit API error: ${response.status}` }),
       };
     }
 
     const data = await response.json();
     const now = Math.floor(Date.now() / 1000);
-    const cutoff48h = now - (48 * 60 * 60);
+    const cutoff48h = now - 48 * 60 * 60;
 
     const posts = (data?.data?.children || [])
-      .map(child => child.data)
-      .filter(post => post.created_utc >= cutoff48h)
-      .map(post => ({
+      .map((child) => child.data)
+      .filter((post) => post.created_utc >= cutoff48h)
+      .map((post) => ({
         id: post.id,
         title: post.title,
         selftext: post.selftext,
@@ -49,15 +59,13 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: { ...cors, "Content-Type": "application/json" },
       body: JSON.stringify({ subreddit: sub, query: q, count: posts.length, posts }),
     };
   } catch (err) {
     return {
       statusCode: 500,
+      headers: { ...cors, "Content-Type": "application/json" },
       body: JSON.stringify({ error: err.message }),
     };
   }
