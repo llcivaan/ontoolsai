@@ -1,4 +1,4 @@
-function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+function _optionalChain(ops){let lastAccessLHS=undefined;let value=ops[0];let i=1;while(i<ops.length){const op=ops[i];const fn=ops[i+1];i+=2;if((op==="optionalAccess"||op==="optionalCall")&&value==null){return undefined;}if(op==="access"||op==="optionalAccess"){lastAccessLHS=value;value=fn(value);}else if(op==="call"||op==="optionalCall"){value=fn((...args)=>value.call(lastAccessLHS,...args));lastAccessLHS=undefined;}}return value;}
 
 const C = {
   amber:"#E8960A", amberDim:"#E8960A15", amberBorder:"#E8960A40",
@@ -284,15 +284,12 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
   const resetToModules=()=>{setStep("module");setToolId(null);setFields({});setOutput("");};
   const goHome=()=>{setStep("trade");setTrade(null);setModule(null);setToolId(null);setFields({});setOutput("");setTab("write");};
 
-  const openCheckout=async(selectedPlan)=>{
-    setCheckoutLoading(true);
-    try{
-      const res=await fetch("/.netlify/functions/create-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({plan:selectedPlan,email:checkoutEmail||""})});
-      const data=await res.json();
-      if(data.url){window.open(data.url,"_blank");}
-      else{alert("Couldn't create checkout. Please try again.");}
-    }catch (e4){alert("Connection error. Please try again.");}
-    setCheckoutLoading(false);
+  const openCheckout=(selectedPlan)=>{
+    const urls={
+      pro:"https://ontoolsai.lemonsqueezy.com/checkout/buy/484e3e85-688b-4dba-9e7d-30356cf18767",
+      business:"https://ontoolsai.lemonsqueezy.com/checkout/buy/ffd389d2-a278-4005-9023-54acdd81fe99"
+    };
+    window.open(urls[selectedPlan],"_blank");
   };
 
   const verifyLicense=async()=>{
@@ -308,7 +305,7 @@ const btn=(active,extra={})=>({background:active?C.amberDim:C.surface2,border:`0
       }else{
         setActivateError(data.error||"Invalid key — check it and try again.");
       }
-    }catch (e5){setActivateError("Connection error. Try again.");}
+    }catch (e4){setActivateError("Connection error. Try again.");}
     setActivateLoading(false);
   };
 
@@ -540,7 +537,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _28 => _28.content, 'optionalAccess', _29 => _29[0], 'optionalAccess', _30 => _30.text])||"Your idea's in the pile. Good pile though.");
-                    }catch (e6){setFeedbackReply("That idea just landed. We'll get on it.");}
+                    }catch (e5){setFeedbackReply("That idea just landed. We'll get on it.");}
                     setFeedbackSent(true);setFeedbackLoading(false);
                   },
                   disabled: feedbackLoading||(!feedbackIdea.trim()&&feedbackTags.length===0),
