@@ -21,7 +21,7 @@ const CHANNELS=[{id:"sms",label:"SMS",icon:"📱"},{id:"email",label:"Email",ico
 
 const MODULES=[
   {id:"communication",icon:"💬",label:"Customer Messages",desc:"Quotes, complaints, delays & more",tools:[
-    {id:"quote_followup",tier:"free",seq:true,label:"Quote Follow-Up",desc:"Chase an unanswered quote",fields:[{id:"customer_name",label:"Customer Name",ph:"e.g. Sarah"},{id:"job_type",label:"Job Type",ph:"e.g. deep clean, roof repair, AC service"},{id:"days_since",label:"Days Since Quote",ph:"e.g. 3"},{id:"your_name",label:"Your Name / Business",ph:"e.g. Mike, Sparkle Clean"}]},
+    {id:"quote_followup",tier:"free",seq:true,label:"Quote Follow-Up",desc:"Chase an unanswered quote — or generate a proven 5-message sequence (Day 1→2→3→5→14)",fields:[{id:"customer_name",label:"Customer Name",ph:"e.g. Sarah"},{id:"job_type",label:"Job Type",ph:"e.g. deep clean, roof repair, AC service"},{id:"days_since",label:"Days Since Quote",ph:"e.g. 3"},{id:"your_name",label:"Your Name / Business",ph:"e.g. Mike, Sparkle Clean"}]},
     {id:"running_late",tier:"free",seq:false,label:"Running Late",desc:"Notify a customer you're delayed",fields:[{id:"customer_name",label:"Customer Name",ph:"e.g. John"},{id:"delay_time",label:"How Late?",ph:"e.g. 20–30 minutes"},{id:"your_name",label:"Your Name",ph:"e.g. Dave, Dave's Plumbing"}]},
     {id:"complaint_response",tier:"free",seq:false,label:"Complaint Response",desc:"Handle an unhappy customer",fields:[{id:"customer_name",label:"Customer Name",ph:"e.g. Mrs. Thompson"},{id:"complaint",label:"Their Complaint",ph:"e.g. job took too long, left a mess"},{id:"resolution",label:"What You'll Offer",ph:"e.g. free follow-up, 10% discount"}]},
     {id:"price_increase",tier:"pro",seq:false,label:"Price Increase Letter",desc:"Announce a rate rise without losing clients",fields:[{id:"business_name",label:"Business Name",ph:"e.g. Green Valley Landscaping"},{id:"old_price",label:"Current Price",ph:"e.g. $120 per visit"},{id:"new_price",label:"New Price",ph:"e.g. $140 per visit"},{id:"effective_date",label:"Effective Date",ph:"e.g. April 1st"}]},
@@ -156,6 +156,9 @@ function buildPrompt(trade, toolId, fields, tone, channel, isSeq, bv) {
   const fv = Object.entries(fields).map(([k,v])=>`${k}: ${v}`).join("\n");
 
   if(isSeq){
+    if(toolId==="quote_followup"){
+      return `Write a 5-message quote follow-up sequence for a ${tl} business owner. Use this exact escalation framework based on how top trade businesses actually follow up:\n\nDay 1 — Politely confirm the customer received the quote. Zero pressure. Warm and brief. Assume it's an oversight.\nDay 2 — Be helpful. Ask if there are any comparisons, questions, or adjustments needed. Open a door, don't nudge a closed one.\nDay 3 — Introduce soft urgency. Mention that the diary is filling up or availability is limited. Still warm, not pushy.\nDay 5 — Force a gentle decision. Something like: "Do you want me to schedule this, or should I let it go for now?" Give them an easy out — that reduces resistance.\nDay 14 — Clean exit. Close it down professionally: "I'll close this on my end for now — but the door stays open whenever you're ready." Never burns the relationship.\n\nTone: ${tnRule}\nChannel: ${ch}. ${chRule}${bvBlock}\n\nDetails:\n${fv}\n\nLabel each message clearly: Day 1, Day 2, Day 3, Day 5, Day 14. Each must be copy-paste ready and stand alone. Mix up the format where appropriate — some calls, some texts.`;
+    }
     return `Write a sequence of 3 messages for a ${tl} business owner.\nTask: ${toolId}\nTone: ${tnRule}\nChannel: ${ch}. ${chRule}${bvBlock}\n\nDetails:\n${fv}\n\nLabel them clearly: Message 1, Message 2, Message 3. Each should escalate appropriately. Each must be copy-paste ready and stand alone.`;
   }
 
@@ -803,8 +806,8 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                   React.createElement('div', { onClick: ()=>{if(!isPro&&usage>=FREE_LIMIT){setShowUpgrade(true);return;}setIsSeq(!isSeq);},
                     style: {...card(),padding:"10px 14px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16,border:`0.5px solid ${isSeq?C.amberBorder:C.border}`},}
                     , React.createElement('div', null
-                      , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:isSeq?C.amber:"#CCC"},}, "✨ Generate full 3-message sequence"    )
-                      , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, "Instead of one — great for follow-ups that actually work"         )
+                      , React.createElement('div', { style: {fontSize:13,fontWeight:700,color:isSeq?C.amber:"#CCC"},}, "✨ Generate full ", toolId==="quote_followup"?"5":"3", "-message sequence"    )
+                      , React.createElement('div', { style: {fontSize:11,color:C.subtle,marginTop:1},}, toolId==="quote_followup"?"Day 1 → 2 → 3 → 5 → 14 escalation — how top trade businesses actually follow up":"Instead of one — great for follow-ups that actually work"         )
                     )
                     , React.createElement('div', { style: {width:36,height:20,background:isSeq?C.amber:C.surface3,borderRadius:10,position:"relative",transition:"background 0.2s",flexShrink:0,marginLeft:12},}
                       , React.createElement('div', { style: {width:14,height:14,background:"#FFF",borderRadius:7,position:"absolute",top:3,left:isSeq?19:3,transition:"left 0.2s"},})
@@ -821,7 +824,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                 , React.createElement('button', { onClick: ()=>generate(),
                   disabled: !toolObj.fields.every(f=>_optionalChain([fields, 'access', _33 => _33[f.id], 'optionalAccess', _34 => _34.trim, 'call', _35 => _35()])),
                   style: {width:"100%",background:toolObj.fields.every(f=>_optionalChain([fields, 'access', _36 => _36[f.id], 'optionalAccess', _37 => _37.trim, 'call', _38 => _38()]))?C.amber:"#1A1A1A",border:"none",borderRadius:12,padding:"15px",cursor:toolObj.fields.every(f=>_optionalChain([fields, 'access', _39 => _39[f.id], 'optionalAccess', _40 => _40.trim, 'call', _41 => _41()]))?"pointer":"not-allowed",color:toolObj.fields.every(f=>_optionalChain([fields, 'access', _42 => _42[f.id], 'optionalAccess', _43 => _43.trim, 'call', _44 => _44()]))?"#000":"#333",fontSize:15,fontWeight:900,letterSpacing:"-0.2px",transition:"all 0.15s"},}
-                  , isSeq?"✨ Generate 3-Message Sequence":"✨ Write This Message"
+                  , isSeq?(toolId==="quote_followup"?"✨ Generate 5-Message Sequence":"✨ Generate 3-Message Sequence"):"✨ Write This Message"
                 )
                 , React.createElement('div', { style: {textAlign:"center",marginTop:8,color:C.subtle,fontSize:11},}
                   , usageLeft, " of "  , FREE_LIMIT, " free messages remaining this month"
@@ -833,7 +836,7 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
             , step==="output"&&(
               React.createElement('div', null
                 , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14},}
-                  , React.createElement('div', { style: {fontSize:16,fontWeight:900},}, isSeq?"Your 3-Message Sequence":"Your Message")
+                  , React.createElement('div', { style: {fontSize:16,fontWeight:900},}, isSeq?(toolId==="quote_followup"?"Your 5-Message Sequence":"Your 3-Message Sequence"):"Your Message")
                   , React.createElement('button', { onClick: resetToFields, style: {background:"none",border:"none",color:C.muted,cursor:"pointer",fontSize:12,padding:0},}, "Write another →"  )
                 )
 
@@ -860,6 +863,22 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       )
                       , React.createElement('button', { onClick: ()=>generate(), style: {flex:1,background:C.surface2,border:`0.5px solid ${C.border2}`,borderRadius:10,padding:"13px",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:600},}, "🔄 Try Again"
 
+                      )
+                    )
+
+                    /* 5-message sequence explainer */
+                    , isSeq&&toolId==="quote_followup"&&(
+                      React.createElement('div', { style: {...card(),padding:"12px 14px",marginBottom:12,border:`0.5px solid ${C.border2}`},}
+                        , React.createElement('div', { style: {fontSize:11,color:C.amber,fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:8},}, "How this sequence works"   )
+                        , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:5},}
+                          , [["Day 1","Confirm they got the quote. No pressure."],["Day 2","Be helpful — address objections before they surface."],["Day 3","Soft urgency — your diary is filling up."],["Day 5","Force a gentle decision — give them an easy out."],["Day 14","Clean exit — never burns the relationship."]].map(([day,desc])=>(
+                            React.createElement('div', { key: day, style: {display:"flex",gap:10,alignItems:"flex-start"},}
+                              , React.createElement('div', { style: {fontSize:11,fontWeight:700,color:C.amber,minWidth:44,paddingTop:1},}, day)
+                              , React.createElement('div', { style: {fontSize:12,color:C.subtle,lineHeight:1.4},}, desc)
+                            )
+                          ))
+                        )
+                        , React.createElement('div', { style: {marginTop:10,fontSize:11,color:C.subtle,borderTop:`0.5px solid ${C.border}`,paddingTop:8},}, "Based on how top trade businesses actually convert quotes — not theory."           )
                       )
                     )
 
