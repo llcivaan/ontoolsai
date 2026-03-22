@@ -598,39 +598,41 @@ function OnToolsAI(){
             , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16},}
               , React.createElement('div', null
                 , React.createElement('div', { style: {fontSize:22,fontWeight:900,letterSpacing:"-0.4px"},}, "📅 My Jobs"  )
-                , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:4},}, jobs.length===0?"Your planner — log jobs, get smart reminders":"Your planner — log jobs, get reminders")
+                , React.createElement('div', { style: {color:C.muted,fontSize:13,marginTop:4},}, "Your planner — log jobs, get reminders"      )
               )
-              , jobs.length>0&&React.createElement('button', { onClick: ()=>openAddJob(calDate), style: {background:C.amber,border:"none",borderRadius:10,padding:"8px 14px",color:"#000",fontSize:12,fontWeight:800,cursor:"pointer"},}, "+ Add Job"  )
+              , React.createElement('button', { onClick: ()=>openAddJob(calDate), style: {background:C.amber,border:"none",borderRadius:10,padding:"8px 14px",color:"#000",fontSize:12,fontWeight:800,cursor:"pointer"},}, "+ Add Job"  )
             )
 
-            /* ── EMPTY STATE SHOWCASE (no jobs ever added) ─────────────────────── */
-            , jobs.length===0?(
-              React.createElement('div', null
-                /* How it works — 3 cards */
-                , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8,marginBottom:18},}
-                  , [
-                    {icon:"📋",title:"Log your jobs",desc:"Add customers, job types, amounts — all in one place. Free, unlimited."},
-                    {icon:"⚡",title:"Get smart reminders",desc:"Quoted 3 days ago? We'll nudge you to follow up. Job done? We'll prompt a review request."},
-                    {icon:"💰",title:"Never miss a payment",desc:"Track what's owed, who's overdue, and send a reminder in one tap."},
-                  ].map((c,i)=>(
-                    React.createElement('div', { key: i, style: {...card(),padding:"14px 16px",display:"flex",gap:12,alignItems:"flex-start"},}
-                      , React.createElement('div', { style: {fontSize:22,minWidth:30},}, c.icon)
-                      , React.createElement('div', null
-                        , React.createElement('div', { style: {fontSize:14,fontWeight:800,marginBottom:3},}, c.title)
-                        , React.createElement('div', { style: {fontSize:12,color:C.muted,lineHeight:1.5},}, c.desc)
-                      )
-                    )
-                  ))
-                )
+            /* Week strip — ALWAYS visible */
+            , React.createElement('div', { style: {display:"flex",gap:4,marginBottom:16,overflowX:"auto"},}
+              , Array.from({length:7},(_,i)=>{
+                const d=new Date();d.setDate(d.getDate()-3+i);
+                const dk=dateKey(d);
+                const isToday=dk===dateKey(new Date());
+                const isSel=dk===calDate;
+                const hasJobs=jobs.some(j=>j.date===dk&&(j.trade===trade||!j.trade));
+                const dayLabel=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()];
+                return(
+                  React.createElement('button', { key: dk, onClick: ()=>setCalDate(dk),
+                    style: {flex:1,minWidth:44,padding:"8px 4px",background:isSel?C.amberDim:C.surface,border:`0.5px solid ${isSel?C.amber:C.border}`,borderRadius:10,cursor:"pointer",textAlign:"center",transition:"all 0.15s"},}
+                    , React.createElement('div', { style: {fontSize:10,color:isSel?C.amber:C.subtle,fontWeight:600},}, dayLabel)
+                    , React.createElement('div', { style: {fontSize:16,fontWeight:800,color:isSel?C.amber:isToday?"#FFF":C.muted,marginTop:2},}, d.getDate())
+                    , hasJobs&&React.createElement('div', { style: {width:5,height:5,background:C.amber,borderRadius:3,margin:"3px auto 0"},})
+                  )
+                );
+              })
+            )
 
-                /* Demo job — one tap */
+            /* ── EMPTY STATE (no jobs yet) ──────────────────────────────────────── */
+            , jobs.length===0&&(
+              React.createElement('div', null
+                /* Demo job — immediately visible below week strip */
                 , (()=>{
                   const demo=DEMO_JOBS[trade]||DEMO_JOBS.cleaning;
                   const st=JOB_STATUSES.find(s=>s.id===demo.status)||JOB_STATUSES[0];
                   return (
                     React.createElement('div', { style: {...card(),padding:18,border:`0.5px solid ${C.amberBorder}`,marginBottom:14},}
                       , React.createElement('div', { style: {fontSize:14,fontWeight:800,marginBottom:10},}, "See it in action ↓"    )
-                      /* Preview card */
                       , React.createElement('div', { style: {...card(),padding:"12px 14px",marginBottom:14,display:"flex",alignItems:"center",gap:12,background:C.surface2},}
                         , React.createElement('div', { style: {fontSize:10,color:C.subtle,fontWeight:600,textTransform:"uppercase",minWidth:44,textAlign:"center"},}
                           , demo.time==="morning"?"AM":demo.time==="afternoon"?"PM":"EVE"
@@ -644,9 +646,9 @@ function OnToolsAI(){
                         )
                       )
                       , React.createElement('button', { onClick: ()=>{
-                        const demo=DEMO_JOBS[trade]||DEMO_JOBS.cleaning;
+                        const d=DEMO_JOBS[trade]||DEMO_JOBS.cleaning;
                         const twoDaysAgo=new Date();twoDaysAgo.setDate(twoDaysAgo.getDate()-2);
-                        const newJob={...demo,id:Date.now().toString(),created:twoDaysAgo.getTime(),date:dateKey(twoDaysAgo),trade};
+                        const newJob={...d,id:Date.now().toString(),created:twoDaysAgo.getTime(),date:dateKey(twoDaysAgo),trade};
                         const updated=[newJob];
                         saveJobs(updated);setJobs(updated);setCalDate(dateKey(twoDaysAgo));
                       }, style: {width:"100%",background:C.amber,border:"none",borderRadius:10,padding:"12px",color:"#000",fontWeight:900,fontSize:14,cursor:"pointer"},}, "Try it — add a sample job"
@@ -657,34 +659,28 @@ function OnToolsAI(){
                   );
                 })()
 
-                /* Or add your own */
-                , React.createElement('button', { onClick: ()=>openAddJob(calDate),
-                  style: {width:"100%",...card(),padding:"14px",textAlign:"center",cursor:"pointer",color:C.amber,fontSize:14,fontWeight:700,border:`0.5px dashed ${C.amberBorder}`},}, "Or add your first real job →"
-
+                /* How it works — below the fold is fine */
+                , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8,marginBottom:14},}
+                  , [
+                    {icon:"📋",title:"Log your jobs",desc:"Add customers, job types, amounts — all in one place. Free, unlimited."},
+                    {icon:"⚡",title:"Get smart reminders",desc:"Quoted 3 days ago? We'll nudge you to follow up. Job done? We'll prompt a review request."},
+                    {icon:"💰",title:"Never miss a payment",desc:"Track what's owed, who's overdue, and send a reminder in one tap."},
+                  ].map((c,i)=>(
+                    React.createElement('div', { key: i, style: {...card(),padding:"12px 14px",display:"flex",gap:12,alignItems:"flex-start"},}
+                      , React.createElement('div', { style: {fontSize:18,minWidth:26},}, c.icon)
+                      , React.createElement('div', null
+                        , React.createElement('div', { style: {fontSize:13,fontWeight:800,marginBottom:2},}, c.title)
+                        , React.createElement('div', { style: {fontSize:11,color:C.muted,lineHeight:1.5},}, c.desc)
+                      )
+                    )
+                  ))
                 )
               )
-            ):(
-              React.createElement('div', null
-                /* Week strip */
-                , React.createElement('div', { style: {display:"flex",gap:4,marginBottom:16,overflowX:"auto"},}
-                  , Array.from({length:7},(_,i)=>{
-                    const d=new Date();d.setDate(d.getDate()-3+i);
-                    const dk=dateKey(d);
-                    const isToday=dk===dateKey(new Date());
-                    const isSel=dk===calDate;
-                    const hasJobs=jobs.some(j=>j.date===dk&&(j.trade===trade||!j.trade));
-                    const dayLabel=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()];
-                    return(
-                      React.createElement('button', { key: dk, onClick: ()=>setCalDate(dk),
-                        style: {flex:1,minWidth:44,padding:"8px 4px",background:isSel?C.amberDim:C.surface,border:`0.5px solid ${isSel?C.amber:C.border}`,borderRadius:10,cursor:"pointer",textAlign:"center",transition:"all 0.15s"},}
-                        , React.createElement('div', { style: {fontSize:10,color:isSel?C.amber:C.subtle,fontWeight:600},}, dayLabel)
-                        , React.createElement('div', { style: {fontSize:16,fontWeight:800,color:isSel?C.amber:isToday?"#FFF":C.muted,marginTop:2},}, d.getDate())
-                        , hasJobs&&React.createElement('div', { style: {width:5,height:5,background:C.amber,borderRadius:3,margin:"3px auto 0"},})
-                      )
-                    );
-                  })
-                )
+            )
 
+            /* ── HAS JOBS — full calendar experience ────────────────────────────── */
+            , jobs.length>0&&(
+              React.createElement('div', null
                 /* Breakfast nudge — when free messages exhausted */
                 , usage>=FREE_LIMIT&&(()=>{
                   const nudge=BREAKFAST_NUDGES[Math.floor(Date.now()/86400000)%BREAKFAST_NUDGES.length];
