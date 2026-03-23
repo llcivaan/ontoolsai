@@ -487,7 +487,7 @@ function OnToolsAI(){
     setLoading(true);setOutput("");setStep("output");
     try{
       const prompt=buildPrompt(trade,toolId,fields,tone,channel,seq,bv);
-      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
+      const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
       const data=await res.json();
       let text=_optionalChain([data, 'access', _52 => _52.content, 'optionalAccess', _53 => _53[0], 'optionalAccess', _54 => _54.text])||"Something went wrong. Please try again.";
       if(!bv)text+="\n\n— Sorted with OnToolsAI (ontoolsai.com)";
@@ -991,7 +991,7 @@ Their message: "${feedbackIdea||"(no message — just tapped chips)"}"
 
 Reply directly to them (use "you/your"). No bullet points. No "Thank you for your feedback." energy. Real talk.`;
                     try{
-                      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:200,messages:[{role:"user",content:prompt}]})});
+                      const res=await fetch("/.netlify/functions/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:200,messages:[{role:"user",content:prompt}]})});
                       const data=await res.json();
                       setFeedbackReply(_optionalChain([data, 'access', _74 => _74.content, 'optionalAccess', _75 => _75[0], 'optionalAccess', _76 => _76.text])||"Your idea's in the pile. Good pile though.");
                     }catch (e7){setFeedbackReply("That idea just landed. We'll get on it.");}
@@ -1322,8 +1322,8 @@ Reply directly to them (use "you/your"). No bullet points. No "Thank you for you
                       ))
                     )
 
-                    /* Affiliate */
-                    , affiliate&&(
+                    /* Affiliate — only show when link is live */
+                    , affiliate&&affiliate.link!=="#"&&(
                       React.createElement('div', { style: {background:"#0D1A10",border:`0.5px solid #152015`,borderRadius:12,padding:"12px 14px",marginBottom:12},}
                         , React.createElement('div', { style: {fontSize:10,color:C.green,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:5},}, "💡 Next step"  )
                         , React.createElement('div', { style: {fontSize:13,color:"#C8E6C9",fontWeight:600,marginBottom:3},}, affiliate.cta)
