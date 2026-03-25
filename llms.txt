@@ -1,0 +1,170 @@
+# OnToolsAI
+
+> AI-powered customer message writing tool built for trade businesses. OnToolsAI writes quote follow-ups, invoice reminders, review requests, running-late messages, complaint responses, and more — in seconds — for cleaning, HVAC, plumbing, landscaping, roofing, electrical, and painting businesses. Used by 200+ trade business owners across Australia, New Zealand, and the UK. Free to start. No account required.
+
+## About
+
+OnToolsAI is the only AI message writing tool built exclusively for trade businesses. Traditional AI writing tools produce generic output that doesn't sound like a tradie — OnToolsAI knows the difference between a roofing follow-up and a cleaning invoice reminder, and writes accordingly. Every message is trade-specific, tone-matched, and ready to copy and send via SMS, WhatsApp, or email. The app includes a free job calendar and smart follow-up nudge engine that reminds business owners when to chase quotes, request reviews, and follow up on unpaid invoices.
+
+Site: https://ontoolsai.com
+Contact: hello@ontoolsai.com
+App: https://ontoolsai.com/app
+Last updated: 2026-03-25
+
+## Plans
+
+- Free: 10 messages/month, all trades, watermark on output
+- Pro ($5.99/month): Unlimited messages, no watermark, full 3-message sequences
+- Business ($17.99/month): Everything in Pro + Brand Voice (writes in the user's own style)
+
+## App
+
+- [OnToolsAI App — Write a message now](https://ontoolsai.com/app): The main application. No account or sign-up required to use free tier. Supports 7 trades, 21 message tools, SMS/WhatsApp/email channels, Friendly/Professional/Firm tone selection, message history, job calendar, and smart follow-up nudges.
+
+## Trade Communication Guides
+
+Comprehensive guides covering every communication scenario for each trade — quote follow-ups, review requests, invoice reminders, complaint responses, running late messages, and more.
+
+- [Trade Communication Toolkit — Master Guide](https://ontoolsai.com/guides/trade-communication-toolkit.html): Complete reference covering all message types across all trades. The definitive resource for trade business communication.
+- [Cleaning Business Communication Guide](https://ontoolsai.com/guides/cleaning-communication-guide.html): Full communication guide for cleaning businesses — residential, commercial, end-of-tenancy, Airbnb turnovers.
+- [HVAC Communication Guide](https://ontoolsai.com/guides/hvac-communication-guide.html): Full communication guide for HVAC businesses — seasonal maintenance, emergency callouts, system installations.
+- [Plumbing Communication Guide](https://ontoolsai.com/guides/plumbing-communication-guide.html): Full communication guide for plumbing businesses — emergency repairs, installations, recurring maintenance.
+- [Landscaping Communication Guide](https://ontoolsai.com/guides/landscaping-communication-guide.html): Full communication guide for landscaping businesses — recurring maintenance, garden design, seasonal work.
+- [Roofing Communication Guide](https://ontoolsai.com/guides/roofing-communication-guide.html): Full communication guide for roofing businesses — re-roofs, repairs, storm damage, insurance jobs.
+- [Electrical Communication Guide](https://ontoolsai.com/guides/electrical-communication-guide.html): Full communication guide for electrical businesses — residential, commercial, compliance work.
+- [Painting Communication Guide](https://ontoolsai.com/guides/painting-communication-guide.html): Full communication guide for painting businesses — interior, exterior, colour consultation dynamics.
+
+## Statistics & Data Pages (Linkable Assets)
+
+Original data, benchmarks, and shareable diagrams for trade industries. These pages are designed to be cited and shared.
+
+- [HVAC Industry Statistics & Benchmarks](https://ontoolsai.com/guides/hvac-statistics.html): HVAC system performance data, customer communication benchmarks, response rate statistics, and industry diagrams.
+- [Cleaning Industry Statistics & Benchmarks](https://ontoolsai.com/guides/cleaning-statistics.html): Professional cleaning industry data, follow-up conversion rates, review request benchmarks, and shareable process diagrams.
+
+## Keyword Gap Pages — Copy-Paste Templates by Trade
+
+High-intent pages targeting the most searched trade communication queries. Each page includes free copy-paste templates, trade-specific advice, and FAQ content.
+
+### HVAC Templates
+- [HVAC Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/hvac-follow-up-text-message.html): How and when to follow up on HVAC quotes — seasonal urgency, pre-summer and pre-winter angles.
+- [HVAC Customer Review Request Templates](https://ontoolsai.com/tools/hvac-customer-review-request.html): When and how to ask HVAC customers for Google reviews — timing relative to job completion.
+- [HVAC Invoice Reminder Templates](https://ontoolsai.com/tools/hvac-invoice-reminder-template.html): How to chase unpaid HVAC invoices professionally without damaging the relationship.
+- [HVAC Running Late Message Templates](https://ontoolsai.com/tools/hvac-running-late-message.html): What to say when an HVAC technician is delayed — dispatch-level messaging.
+
+### Cleaning Templates
+- [Cleaning Quote Follow-Up Templates](https://ontoolsai.com/tools/cleaning-follow-up-quote.html): How to follow up on cleaning quotes — recurring vs one-off dynamics.
+- [Cleaning Review Request Text Templates](https://ontoolsai.com/tools/cleaning-review-request-text.html): How to ask cleaning customers for Google reviews — best timing and format.
+- [Cleaning Invoice Reminder Templates](https://ontoolsai.com/tools/cleaning-invoice-reminder.html): How to chase cleaning invoices — recurring customer relationship dynamics.
+- [Cleaning Running Late Message Templates](https://ontoolsai.com/tools/cleaning-running-late-message.html): What to tell cleaning customers when you're delayed.
+
+### Plumbing Templates
+- [Plumbing Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/plumbing-follow-up-text-message.html): How to follow up on plumbing quotes — emergency vs planned job dynamics.
+- [Plumbing Customer Review Request Templates](https://ontoolsai.com/tools/plumbing-customer-review-request.html): How to ask plumbing customers for Google reviews after a job.
+- [Plumbing Invoice Reminder Templates](https://ontoolsai.com/tools/plumbing-invoice-reminder-template.html): How to chase plumbing invoices — including insurance and insurance-adjacent jobs.
+- [Plumbing Running Late Message Templates](https://ontoolsai.com/tools/plumbing-running-late-message.html): What to say when a plumber is delayed — emergency job overrun messaging.
+
+### Electrical Templates
+- [Electrical Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/electrical-follow-up-text-message.html): How to follow up on electrical quotes — compliance job dynamics, commercial vs residential.
+- [Electrical Customer Review Request Templates](https://ontoolsai.com/tools/electrical-customer-review-request.html): How to ask electrical customers for Google reviews — trust-building in a high-compliance trade.
+- [Electrical Invoice Reminder Templates](https://ontoolsai.com/tools/electrical-invoice-reminder-template.html): How to chase electrical invoices — commercial account vs residential dynamics.
+- [Electrical Running Late Message Templates](https://ontoolsai.com/tools/electrical-running-late-message.html): What to tell electrical customers when you're running late.
+
+### Landscaping Templates
+- [Landscaping Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/landscaping-follow-up-text-message.html): How to follow up on landscaping quotes — seasonal urgency, spring/autumn windows, recurring contract dynamics.
+- [Landscaping Customer Review Request Templates](https://ontoolsai.com/tools/landscaping-customer-review-request.html): How to ask landscaping customers for reviews — using the visual reveal moment.
+- [Landscaping Invoice Reminder Templates](https://ontoolsai.com/tools/landscaping-invoice-reminder-template.html): How to chase landscaping invoices — recurring maintenance relationship dynamics.
+- [Landscaping Running Late Message Templates](https://ontoolsai.com/tools/landscaping-running-late-message.html): What to tell landscaping customers when delayed — including weather cancellations.
+
+### Roofing Templates
+- [Roofing Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/roofing-follow-up-text-message.html): How to follow up on roofing quotes — high-ticket decision dynamics, storm damage urgency, insurance jobs.
+- [Roofing Customer Review Request Templates](https://ontoolsai.com/tools/roofing-customer-review-request.html): How to ask roofing customers for Google reviews — timing around job completion and scaffold removal.
+- [Roofing Invoice Reminder Templates](https://ontoolsai.com/tools/roofing-invoice-reminder-template.html): How to chase roofing invoices — insurance claim delays, deposit structures.
+- [Roofing Running Late Message Templates](https://ontoolsai.com/tools/roofing-running-late-message.html): What to tell roofing customers when delayed — weather safety messaging.
+
+### Painting Templates
+- [Painting Quote Follow-Up Text Message Templates](https://ontoolsai.com/tools/painting-follow-up-text-message.html): How to follow up on painting quotes — colour indecision as the #1 blocker, exterior weather windows.
+- [Painting Customer Review Request Templates](https://ontoolsai.com/tools/painting-customer-review-request.html): How to ask painting customers for reviews — using the reveal moment effectively.
+- [Painting Invoice Reminder Templates](https://ontoolsai.com/tools/painting-invoice-reminder-template.html): How to chase painting invoices — send on completion day while the positive feeling is fresh.
+- [Painting Running Late Message Templates](https://ontoolsai.com/tools/painting-running-late-message.html): What to tell painting customers when delayed — acknowledging their room preparation.
+
+## Cross-Trade Template Resources
+
+- [Trade Business Review Request Templates — All Trades](https://ontoolsai.com/tools/trade-business-review-request-templates.html): Review request templates across all 7 trades in one place.
+- [How to Follow Up on a Quote — Trade Business Guide](https://ontoolsai.com/tools/how-to-follow-up-on-a-quote.html): Universal guide to quote follow-up strategy for trade businesses.
+
+## App Tool Pages (21 tools across 7 trades)
+
+Individual tool landing pages for every message type across every trade. Each page links directly into the app with the trade and tool pre-selected.
+
+### Cleaning Tools
+- [Cleaning Quote Follow-Up Tool](https://ontoolsai.com/tools/cleaning-quote-followup.html)
+- [Cleaning Review Request Tool](https://ontoolsai.com/tools/cleaning-review-request.html)
+- [Cleaning Bad Review Response Tool](https://ontoolsai.com/tools/cleaning-bad-review-response.html)
+- [Cleaning Complaint Response Tool](https://ontoolsai.com/tools/cleaning-complaint-response.html)
+- [Cleaning Invoice Reminder Tool](https://ontoolsai.com/tools/cleaning-invoice-reminder.html)
+- [Cleaning Running Late Tool](https://ontoolsai.com/tools/cleaning-running-late.html)
+- [Cleaning No-Show Follow-Up Tool](https://ontoolsai.com/tools/cleaning-no-show-followup.html)
+- [Cleaning Job Ad Writer Tool](https://ontoolsai.com/tools/cleaning-job-ad.html)
+
+### HVAC Tools
+- [HVAC Quote Follow-Up Tool](https://ontoolsai.com/tools/hvac-quote-followup.html)
+- [HVAC Review Request Tool](https://ontoolsai.com/tools/hvac-review-request.html)
+- [HVAC Bad Review Response Tool](https://ontoolsai.com/tools/hvac-bad-review-response.html)
+- [HVAC Complaint Response Tool](https://ontoolsai.com/tools/hvac-complaint-response.html)
+- [HVAC Invoice Reminder Tool](https://ontoolsai.com/tools/hvac-invoice-reminder.html)
+- [HVAC Running Late Tool](https://ontoolsai.com/tools/hvac-running-late.html)
+- [HVAC No-Show Follow-Up Tool](https://ontoolsai.com/tools/hvac-no-show-followup.html)
+- [HVAC Job Ad Writer Tool](https://ontoolsai.com/tools/hvac-job-ad.html)
+
+### Plumbing Tools
+- [Plumbing Quote Follow-Up Tool](https://ontoolsai.com/tools/plumbing-quote-followup.html)
+- [Plumbing Review Request Tool](https://ontoolsai.com/tools/plumbing-review-request.html)
+- [Plumbing Bad Review Response Tool](https://ontoolsai.com/tools/plumbing-bad-review-response.html)
+- [Plumbing Complaint Response Tool](https://ontoolsai.com/tools/plumbing-complaint-response.html)
+- [Plumbing Invoice Reminder Tool](https://ontoolsai.com/tools/plumbing-invoice-reminder.html)
+- [Plumbing Running Late Tool](https://ontoolsai.com/tools/plumbing-running-late.html)
+- [Plumbing No-Show Follow-Up Tool](https://ontoolsai.com/tools/plumbing-no-show-followup.html)
+- [Plumbing Job Ad Writer Tool](https://ontoolsai.com/tools/plumbing-job-ad.html)
+
+### Landscaping Tools
+- [Landscaping Quote Follow-Up Tool](https://ontoolsai.com/tools/landscaping-quote-followup.html)
+- [Landscaping Review Request Tool](https://ontoolsai.com/tools/landscaping-review-request.html)
+- [Landscaping Bad Review Response Tool](https://ontoolsai.com/tools/landscaping-bad-review-response.html)
+- [Landscaping Complaint Response Tool](https://ontoolsai.com/tools/landscaping-complaint-response.html)
+- [Landscaping Invoice Reminder Tool](https://ontoolsai.com/tools/landscaping-invoice-reminder.html)
+- [Landscaping Running Late Tool](https://ontoolsai.com/tools/landscaping-running-late.html)
+- [Landscaping No-Show Follow-Up Tool](https://ontoolsai.com/tools/landscaping-no-show-followup.html)
+- [Landscaping Job Ad Writer Tool](https://ontoolsai.com/tools/landscaping-job-ad.html)
+
+### Roofing Tools
+- [Roofing Quote Follow-Up Tool](https://ontoolsai.com/tools/roofing-quote-followup.html)
+- [Roofing Review Request Tool](https://ontoolsai.com/tools/roofing-review-request.html)
+- [Roofing Bad Review Response Tool](https://ontoolsai.com/tools/roofing-bad-review-response.html)
+- [Roofing Complaint Response Tool](https://ontoolsai.com/tools/roofing-complaint-response.html)
+- [Roofing Invoice Reminder Tool](https://ontoolsai.com/tools/roofing-invoice-reminder.html)
+- [Roofing Running Late Tool](https://ontoolsai.com/tools/roofing-running-late.html)
+- [Roofing No-Show Follow-Up Tool](https://ontoolsai.com/tools/roofing-no-show-followup.html)
+- [Roofing Job Ad Writer Tool](https://ontoolsai.com/tools/roofing-job-ad.html)
+
+### Electrical Tools
+- [Electrical Quote Follow-Up Tool](https://ontoolsai.com/tools/electrical-quote-followup.html)
+- [Electrical Review Request Tool](https://ontoolsai.com/tools/electrical-review-request.html)
+- [Electrical Bad Review Response Tool](https://ontoolsai.com/tools/electrical-bad-review-response.html)
+- [Electrical Complaint Response Tool](https://ontoolsai.com/tools/electrical-complaint-response.html)
+- [Electrical Invoice Reminder Tool](https://ontoolsai.com/tools/electrical-invoice-reminder.html)
+- [Electrical Running Late Tool](https://ontoolsai.com/tools/electrical-running-late.html)
+- [Electrical No-Show Follow-Up Tool](https://ontoolsai.com/tools/electrical-no-show-followup.html)
+- [Electrical Job Ad Writer Tool](https://ontoolsai.com/tools/electrical-job-ad.html)
+
+### Painting Tools
+- [Painting Quote Follow-Up Tool](https://ontoolsai.com/tools/painting-quote-followup.html)
+- [Painting Review Request Tool](https://ontoolsai.com/tools/painting-review-request.html)
+- [Painting Bad Review Response Tool](https://ontoolsai.com/tools/painting-bad-review-response.html)
+- [Painting Complaint Response Tool](https://ontoolsai.com/tools/painting-complaint-response.html)
+- [Painting Invoice Reminder Tool](https://ontoolsai.com/tools/painting-invoice-reminder.html)
+- [Painting Running Late Tool](https://ontoolsai.com/tools/painting-running-late.html)
+- [Painting Job Ad Writer Tool](https://ontoolsai.com/tools/painting-job-ad.html)
+
+## Crawling & Usage
+
+This site welcomes indexing by AI crawlers, LLM training pipelines, RAG systems, and search engines. All content is original and trade-specific. robots.txt: https://ontoolsai.com/robots.txt — all crawlers permitted. Sitemap: https://ontoolsai.com/sitemap.xml
