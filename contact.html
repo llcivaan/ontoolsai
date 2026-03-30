@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — OnToolsAI</title>
+  <meta name="description" content="Get in touch with the OnToolsAI team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --amber: #E8960A; --amber-d: #C97E00; --bg: #0D0D0D; --surface: #131313; --surface2: #1A1A1A; --text: #F0EBE0; --muted: #888888; --border: #2A2A2A; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--amber); text-decoration: none; } a:hover { text-decoration: underline; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .amber { color: var(--amber); }
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 999; padding: 20px 0; background: rgba(13,13,13,0.88); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 6px; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--text); text-decoration: none; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 24px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; border: none; }
+    .btn-primary { background: var(--amber); color: #000; } .btn-primary:hover { background: var(--amber-d); text-decoration: none; }
+    .nav-cta { padding: 10px 20px; font-size: 14px; }
+
+    .contact-wrap { max-width: 640px; margin: 0 auto; padding: 120px 24px 80px; }
+    .contact-wrap h1 { font-size: 36px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .contact-wrap .sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+    .contact-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+    .contact-card a { font-size: 16px; font-weight: 700; color: var(--amber); }
+
+    .contact-meta { font-size: 13px; color: var(--muted); margin-top: 32px; line-height: 1.8; }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 0 28px; margin-top: 80px; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-size: 17px; font-weight: 700; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; } .footer-links a:hover { color: var(--text); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; font-size: 12px; color: var(--muted); text-align: center; }
+  </style>
+</head>
+<body>
+<header id="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="/" class="nav-logo"><span class="amber">⚡</span>OnTools<span class="amber">AI</span></a>
+      <a href="/app" class="btn btn-primary nav-cta">Try it free →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="contact-wrap">
+  <h1>Get in touch</h1>
+  <p class="sub">We're a small team — we read every message and reply within 1 business day.</p>
+
+  <div class="contact-card">
+    <h2>📧 General enquiries</h2>
+    <p>Questions about the product, your account, or anything else.</p>
+    <a href="mailto:hello@ontoolsai.com">hello@ontoolsai.com</a>
+  </div>
+
+  <div class="contact-card">
+    <h2>💳 Billing & subscriptions</h2>
+    <p>Payment issues, cancellations, or refund requests.</p>
+    <a href="mailto:hello@ontoolsai.com">hello@ontoolsai.com</a>
+  </div>
+
+  <div class="contact-card">
+    <h2>🐛 Bug reports & feedback</h2>
+    <p>Found something broken, or have a feature idea? We want to hear it.</p>
+    <a href="mailto:hello@ontoolsai.com">hello@ontoolsai.com</a>
+  </div>
+
+  <div class="contact-meta">
+    <strong style="color: var(--text);">OnToolsAI</strong><br />
+    17 Anndale Drive<br />
+    Toronto, Ontario, Canada<br />
+    <a href="mailto:hello@ontoolsai.com">hello@ontoolsai.com</a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-logo"><span class="amber">⚡</span>OnTools<span class="amber">AI</span></div>
+      <div class="footer-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/cookie-policy.html">Cookie Policy</a>
+        <a href="/refund-policy.html">Refund Policy</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 OnToolsAI. Built for the people who build everything else.<br /><span style="opacity:0.5;">Powered by Claude AI</span></div>
+  </div>
+</footer>
+</body>
+</html>
