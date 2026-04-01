@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Trade Business Communication Bible — 50 Copy-Paste Messages | OnToolsAI</title>
+  <meta name="description" content="50 ready-to-send customer messages for trade businesses. Quote follow-ups, invoice reminders, review requests, complaint responses and more. Free download from OnToolsAI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amber: #E8960A;
+      --amber-dim: #E8960A18;
+      --amber-border: #E8960A40;
+      --bg: #0D0D0D;
+      --surface: #131313;
+      --surface2: #1A1A1A;
+      --surface3: #242424;
+      --border: #252525;
+      --text: #F0EBE0;
+      --muted: #888;
+      --subtle: #555;
+    }
+    html { color-scheme: dark; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--amber); text-decoration: none; }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: #fff; color: #111; font-size: 11pt; }
+      :root { --bg: #fff; --surface: #f5f5f5; --surface2: #efefef; --surface3: #e8e8e8; --border: #ddd; --text: #111; --muted: #555; --subtle: #888; --amber: #b87000; --amber-dim: #b8700012; --amber-border: #b8700030; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      .msg-card { break-inside: avoid; }
+      .cover { page-break-after: always; }
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── COVER ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 80px 28px;
+      max-width: 860px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .cover-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; margin-bottom: 60px; }
+    .cover-logo .amber { color: var(--amber); }
+    .cover-tag {
+      display: inline-flex;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--amber); background: var(--amber-dim); border: 1px solid var(--amber-border);
+      padding: 5px 14px; border-radius: 99px; margin-bottom: 28px;
+    }
+    .cover h1 {
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .cover h1 .amber { color: var(--amber); }
+    .cover-sub {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+    .cover-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .cover-stat { }
+    .cover-stat-num { font-size: 36px; font-weight: 800; color: var(--amber); letter-spacing: -0.02em; }
+    .cover-stat-lbl { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .cover-trades {
+      font-size: 13px;
+      color: var(--subtle);
+      margin-top: 20px;
+    }
+    .cover-trades span { color: var(--muted); margin-right: 4px; }
+
+    /* ── HOW TO USE ── */
+    .how-section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 20px;
+    }
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
+    .how-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .how-num {
+      font-size: 28px; font-weight: 800; color: var(--amber);
+      opacity: 0.4; margin-bottom: 8px; letter-spacing: -0.02em;
+    }
+    .how-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── CATEGORY HEADER ── */
+    .cat-header {
+      padding: 56px 0 10px;
+    }
+    .cat-header h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .cat-header p { font-size: 14px; color: var(--muted); }
+    .cat-count { color: var(--amber); font-weight: 700; }
+
+    /* ── MESSAGE CARD ── */
+    .msg-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+    .msg-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .msg-num {
+      font-size: 11px; font-weight: 700; color: var(--amber);
+      background: var(--amber-dim); border: 1px solid var(--amber-border);
+      padding: 2px 8px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    }
+    .msg-title { font-size: 16px; font-weight: 700; line-height: 1.3; flex: 1; }
+    .msg-trade {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--muted); background: var(--surface2);
+      padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0;
+    }
+    .msg-context {
+      padding: 12px 22px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+    .msg-body {
+      padding: 18px 22px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .placeholder {
+      background: rgba(232,150,10,0.12);
+      border: 1px solid var(--amber-border);
+      color: var(--amber);
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+
+    /* ── CONVERSION SECTION ── */
+    .convert-section {
+      margin: 60px 0;
+      background: var(--surface);
+      border: 1px solid var(--amber-border);
+      border-radius: 20px;
+      padding: 56px 44px;
+      text-align: center;
+    }
+    .convert-section h2 {
+      font-size: clamp(22px, 3.5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .convert-section h2 .amber { color: var(--amber); }
+    .convert-section p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: #0D0D0D;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 16px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+    .convert-proof {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer .footer-logo { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+
+    @media (max-width: 600px) {
+      .cover-stats { gap: 24px; }
+      .msg-header { flex-wrap: wrap; }
+      .convert-section { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<div class="cover" id="top">
+  <div class="cover-logo">
+    <span class="amber">⚡</span>OnTools<span class="amber">AI</span>
+  </div>
+  <div class="cover-tag">Free Resource · 2026 Edition</div>
+  <h1>The Trade Business<br /><span class="amber">Communication Bible</span></h1>
+  <p class="cover-sub">50 copy-paste messages covering every customer situation a trade business faces. Human, professional, and ready to send.</p>
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="cover-stat-num">50</div>
+      <div class="cover-stat-lbl">ready-to-send messages</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">10</div>
+      <div class="cover-stat-lbl">categories covered</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">7</div>
+      <div class="cover-stat-lbl">trades, one guide</div>
+    </div>
+  </div>
+  <div class="cover-trades">
+    <span>Covers:</span> 🧹 Cleaning · ❄️ HVAC · 🔧 Plumbing · 🌿 Landscaping · 🏠 Roofing · ⚡ Electrical · 🖌️ Painting
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HOW TO USE
+══════════════════════════════════════════ -->
+<div class="container">
+<section class="how-section">
+  <div class="section-label">How to use this guide</div>
+  <p style="color:var(--muted);font-size:15px;max-width:580px;line-height:1.7;">Each message is ready to copy and send. Replace the <span style="color:var(--amber);font-weight:600;">[bracketed text]</span> with your details. Most messages are under 100 words — written for SMS but work just as well over email or WhatsApp.</p>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <p>Find your situation in the contents. Every scenario a trade business faces is covered.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <p>Copy the message. Replace the <strong style="color:var(--amber);">[brackets]</strong> with your customer's name, job details, and amount.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <p>Send it. SMS, WhatsApp, email — the tone works across all channels. Don't overthink it.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">04</div>
+      <p>Make it yours. Add your sign-off, adjust the tone slightly. The structure does the heavy lifting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 1 — QUOTE FOLLOW-UPS
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 01 of 10</div>
+  <h2>Quote Follow-Ups <span class="cat-count">(8 messages)</span></h2>
+  <p>The messages that turn a silent quote into a booked job. Warm, specific, and never pushy.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#01</div>
+    <div class="msg-title">First follow-up — 3 days no reply</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send 3 days after sending a quote that has gone quiet. Assume they got busy, not that they said no.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just wanted to check the quote came through okay — sometimes they go to junk. Happy to answer any questions or walk through anything before you decide. No pressure either way.
+
+<span class="placeholder">[Your name]</span>, <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#02</div>
+    <div class="msg-title">Second follow-up — 7 days no reply</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send 7 days after the quote if there has still been no response. Give them an easy way to say no.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, following up on the quote from last week. Totally understand if the timing isn't right — just let me know and I'll stop chasing. If you do still want to go ahead, I'm happy to hold the price until <span class="placeholder">[date]</span>.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#03</div>
+    <div class="msg-title">Follow-up — price concern opener</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you suspect the quote was higher than expected and want to open a conversation without being pushy.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just checking in on the quote. If the price is a sticking point, I'm happy to talk through it — there might be a way to phase the work or adjust the scope without compromising what matters. Worth a 5-minute call?
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#04</div>
+    <div class="msg-title">Follow-up — availability urgency</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When your schedule is genuinely filling up and you want to give the customer a real reason to decide.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just wanted to flag that my <span class="placeholder">[month]</span> slots are filling up fast. If you're still planning to go ahead, it's worth locking in soon to avoid a longer wait. Happy to hold a date for you if you want to confirm.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#05</div>
+    <div class="msg-title">Quote follow-up — after a voicemail</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After leaving a voicemail for a customer who hasn't replied to your quote. Gives them a lower-friction way to respond.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, tried you just now — no worries if it's a bad time. Just following up on the quote for <span class="placeholder">[job type]</span>. Feel free to reply here if easier than a call.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#06</div>
+    <div class="msg-title">Quote close — soft exit Day 14</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Two weeks in with no reply. This is your last message. Make it easy for them to come back later without embarrassment.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'll leave it here on the quote — don't want to keep chasing and become a nuisance. If the timing works better later in the year, just get in touch and I'll send a fresh one. All the best.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#07</div>
+    <div class="msg-title">Quote follow-up — after a site visit</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send the same day as a site visit, before the quote is sent. Keeps the conversation warm while the visit is fresh.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, good to meet you earlier. I'll get the quote across to you by <span class="placeholder">[time/day]</span>. Any questions in the meantime, feel free to message me here — easier than a call sometimes.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#08</div>
+    <div class="msg-title">Quote follow-up — seasonal urgency</div>
+    <div class="msg-trade">HVAC / seasonal trades</div>
+  </div>
+  <div class="msg-context">Before peak season when demand is about to spike. Works well for HVAC, roofing, landscaping, and painting.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just a heads-up that we're heading into the busy season and slots are going fast. The quote I sent is still valid — if you want to beat the rush and lock in a date, now's a good time. Happy to chat if you have questions.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 2 — INVOICE & PAYMENT
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 02 of 10</div>
+  <h2>Invoice &amp; Payment <span class="cat-count">(8 messages)</span></h2>
+  <p>Get paid without damaging the relationship. Warm first, firmer only if needed.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#09</div>
+    <div class="msg-title">First invoice reminder — polite, assumes oversight</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send 3 to 5 days after a due date. Most late payments are genuine oversights — treat them that way.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just a gentle nudge on invoice <span class="placeholder">#[number]</span> for <span class="placeholder">[amount]</span> — it may have slipped through. Happy to resend if easier. Payment details are <span class="placeholder">[bank/payment link]</span>.
+
+Thanks, <span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#10</div>
+    <div class="msg-title">Second invoice reminder — firmer tone</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">7 to 10 days after the first reminder with no response. Adds a specific deadline without being aggressive.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, following up again on invoice <span class="placeholder">#[number]</span> for <span class="placeholder">[amount]</span> — now <span class="placeholder">[X]</span> days overdue. Could you let me know when you're able to settle this? I'd appreciate payment by <span class="placeholder">[date]</span> if possible.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#11</div>
+    <div class="msg-title">Final notice — before escalation</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When the invoice is significantly overdue and you need to make next steps clear. Professional, not threatening.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, this is a final notice regarding invoice <span class="placeholder">#[number]</span> for <span class="placeholder">[amount]</span>, now <span class="placeholder">[X]</span> days overdue. If I don't hear from you by <span class="placeholder">[date]</span> I'll need to consider formal recovery options. I'd much rather resolve this directly — please get in touch.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#12</div>
+    <div class="msg-title">Deposit request — before job starts</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After a job is booked and you need to collect a deposit to secure materials or the slot.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, great — looking forward to getting started on <span class="placeholder">[date]</span>. As discussed, I'll need a deposit of <span class="placeholder">[amount]</span> to secure the booking and order materials. Payment details: <span class="placeholder">[bank/link]</span>. Let me know once sent.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#13</div>
+    <div class="msg-title">Partial payment acknowledgement</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When a customer has paid part of an invoice. Acknowledge it professionally and confirm the remaining balance.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, thanks — I can see <span class="placeholder">[amount]</span> has come through. Just to confirm, the remaining balance of <span class="placeholder">[amount]</span> is due by <span class="placeholder">[date]</span>. Give me a shout if you have any questions.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#14</div>
+    <div class="msg-title">Payment received — confirmation</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Once full payment clears. Short, warm, professional. Leaves the customer feeling good about paying.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, payment received — thank you. It was a pleasure working on <span class="placeholder">[job]</span>. If you ever need us again or know someone who does, we'd love to help.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#15</div>
+    <div class="msg-title">Invoice reminder — long-term client</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">A late payment from a client you have a long-standing relationship with. Warmer tone, preserve the relationship.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, hope all's well — just a quick one. Invoice <span class="placeholder">#[number]</span> for <span class="placeholder">[amount]</span> is overdue. I know you're usually on it, so figured it might have just slipped through. No rush on a reply, just let me know when you can sort it.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#16</div>
+    <div class="msg-title">Overdue payment — payment plan offer</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When a customer is struggling to pay in full. Offering a plan is better than a debt collector for everyone.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I understand things can get tight — if paying <span class="placeholder">[amount]</span> all at once is difficult right now, I'm open to splitting it. Let me know what works and we can agree something between us. Better to sort it this way.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 3 — REVIEW REQUESTS
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 03 of 10</div>
+  <h2>Review Requests <span class="cat-count">(6 messages)</span></h2>
+  <p>The message you send matters more than the platform you send it on. Personal beats automated every time.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#17</div>
+    <div class="msg-title">Review request — same day after job</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send within 2 hours of finishing a job. This is the highest-converting window — the customer is still in the moment.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, hope everything looks good after today's job. If you're happy with the work, a quick Google review would mean a lot to us — it really helps a small business. Here's the link: <span class="placeholder">[Google review link]</span>. Only takes a minute. Thanks either way.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#18</div>
+    <div class="msg-title">Review request — next morning follow-up</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For jobs completed late in the day where sending the same evening felt too soon. Fresh start the next morning.</div>
+  <div class="msg-body">Morning <span class="placeholder">[name]</span>, hope <span class="placeholder">[the system/the room/the job]</span> is working well after yesterday. If you were happy with how it went, a Google review would be really helpful for us: <span class="placeholder">[link]</span>. Appreciate it.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#19</div>
+    <div class="msg-title">Review request — 1 week later if not yet asked</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">If the job was completed but you forgot to ask at the time. A week is still close enough to convert.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, hope everything's been fine since we finished the <span class="placeholder">[job]</span> last week. I meant to ask at the time — if you were happy with the work, would you mind leaving us a quick Google review? It genuinely makes a difference. <span class="placeholder">[link]</span>
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#20</div>
+    <div class="msg-title">Review request — after complaint resolution</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After successfully resolving a complaint. A customer who felt heard often leaves a better review than one who had no problems at all.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, glad we got that sorted for you. If you felt we handled it well, we'd be really grateful for a Google review — honestly, it helps more than people realise. <span class="placeholder">[link]</span>. No worries if not.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#21</div>
+    <div class="msg-title">Review request — repeat customer</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For a loyal customer who has used you multiple times but never left a review. More personal tone than a first-time ask.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, you've been a brilliant customer and I really appreciate the continued trust. I've never asked before, but if you felt like leaving us a Google review it would genuinely help us grow. <span class="placeholder">[link]</span>. Thanks either way — always a pleasure.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#22</div>
+    <div class="msg-title">Review request — referral acknowledgement</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After a customer referred someone to you. They clearly think highly of you — ask them to put it on Google too.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, heard that you put <span class="placeholder">[referred name]</span> in touch with us — that means a lot, thank you. If you ever wanted to share the same in a Google review, we'd be so grateful. <span class="placeholder">[link]</span>. No pressure at all.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 4 — REVIEW RESPONSES
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 04 of 10</div>
+  <h2>Review Responses <span class="cat-count">(6 messages)</span></h2>
+  <p>Every response is read by future customers, not just the reviewer. Professional, human, never defensive.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#23</div>
+    <div class="msg-title">Response to 5-star review — generic warm</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For any positive review where the customer did not mention specific details. Keep it short and genuine.</div>
+  <div class="msg-body">Thank you so much <span class="placeholder">[name]</span> — really glad the job went smoothly and that you were happy with the work. It's always great to hear from customers, and we really appreciate you taking the time to leave a review. Hope to work with you again in the future.
+
+— <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#24</div>
+    <div class="msg-title">Response to 5-star review — mentions specific work</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When the reviewer mentioned the specific job or team member. Reference it back — shows you read and care.</div>
+  <div class="msg-body">Thanks <span class="placeholder">[name]</span>, really appreciate the kind words about <span class="placeholder">[specific thing they mentioned]</span>. That's exactly the standard we aim for on every job. We'd love to help again whenever you need us.
+
+— <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#25</div>
+    <div class="msg-title">Response to 3-star review — neutral/mixed</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">A mixed review where some things went well and some didn't. Acknowledge both, invite them to discuss directly.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, thank you for taking the time to leave feedback — we really do take it seriously. We're glad <span class="placeholder">[positive aspect]</span> met your expectations. We'd welcome the chance to understand where we could have done better — please feel free to get in touch directly.
+
+— <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#26</div>
+    <div class="msg-title">Response to 2-star review — de-escalation</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">A clearly unhappy customer. Stay calm, take responsibility where fair, move the conversation offline.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm sorry to hear your experience wasn't what you expected — that's not the standard we aim for. I'd like to understand what happened and make it right if possible. Please get in touch with me directly on <span class="placeholder">[number/email]</span> so we can talk through it.
+
+— <span class="placeholder">[Your name]</span>, <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#27</div>
+    <div class="msg-title">Response to 1-star review — professional and firm</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">The most difficult response to get right. Stay professional, don't get defensive, and let other readers see how you handle it.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm sorry to see this — we take all feedback seriously. I've reviewed our records from <span class="placeholder">[job/date]</span> and would like to discuss this with you directly. We genuinely want to resolve this. Please contact me on <span class="placeholder">[number/email]</span>.
+
+— <span class="placeholder">[Your name]</span>, <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#28</div>
+    <div class="msg-title">Response to fake or unfair review</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you have no record of this customer, or the review contains factual inaccuracies. Professional and factual — not angry.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, we take all reviews seriously, but we have no record of working with anyone by this name or at this address. We'd welcome the chance to look into this — please contact us directly on <span class="placeholder">[number/email]</span> so we can understand more.
+
+— <span class="placeholder">[Business name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 5 — RUNNING LATE & NO SHOWS
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 05 of 10</div>
+  <h2>Running Late &amp; No Shows <span class="cat-count">(4 messages)</span></h2>
+  <p>Communicate before the customer starts wondering. Silence costs more goodwill than the delay itself.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#29</div>
+    <div class="msg-title">Running late — 20 to 30 minutes</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Send as soon as you know you'll be late. Before the customer is waiting and wondering.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just to let you know I'm running about <span class="placeholder">[20–30]</span> minutes behind — the previous job took longer than expected. Sorry for the delay, I'm on my way. Should be with you by around <span class="placeholder">[time]</span>.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#30</div>
+    <div class="msg-title">Running late — over an hour</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you are significantly delayed and the customer may need to make alternative plans. Offer to rebook if needed.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm really sorry — I'm running over an hour behind and I didn't want to leave you waiting without warning. I understand if you'd rather rebook — just say the word and I'll find you another slot this week. Otherwise I can still come, just later than planned. Apologies again.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#31</div>
+    <div class="msg-title">Customer no-show follow-up</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After arriving at a job and the customer isn't there. Don't assume the worst — they may have simply forgotten.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm at <span class="placeholder">[address]</span> now for our <span class="placeholder">[time]</span> appointment. Just checking everything's okay and that I have the right time and place. Give me a call when you get this — I can wait a few minutes.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#32</div>
+    <div class="msg-title">Rescheduling request — your side</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you need to move an appointment due to something on your end. Apologise, take responsibility, give options.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm really sorry to do this but I need to move our <span class="placeholder">[date/time]</span> appointment — <span class="placeholder">[brief reason e.g. an emergency job/illness]</span>. I can do <span class="placeholder">[option 1]</span> or <span class="placeholder">[option 2]</span> — whichever works best for you. Sorry again for the inconvenience.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 6 — COMPLAINT HANDLING
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 06 of 10</div>
+  <h2>Complaint Handling <span class="cat-count">(4 messages)</span></h2>
+  <p>How you respond to a complaint matters more than the complaint itself. Acknowledge first, always.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#33</div>
+    <div class="msg-title">Initial complaint response — empathetic</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">First response to any complaint. Acknowledge the experience before anything else — don't explain or defend yet.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, thank you for letting me know — I'm sorry to hear that. That's not the standard I work to and I want to make sure it gets sorted properly. Can I call you in the next hour to talk through what happened?
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#34</div>
+    <div class="msg-title">Complaint response — offering resolution</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After understanding the complaint. Name the specific remedy you are offering and confirm the next step.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I've had a think about what you described and I'd like to <span class="placeholder">[return and fix it / offer a partial refund / send someone back out]</span>. I can do <span class="placeholder">[date/time]</span> — does that work? I want to make sure this is resolved properly.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#35</div>
+    <div class="msg-title">Complaint response — after revisit</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">After returning to fix the issue. Confirm it has been resolved and check the customer is satisfied.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just checking in after the visit today — hope that's resolved it for you. Let me know if there's anything else you're not happy with and I'll get it sorted. I want to make sure you're fully satisfied.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#36</div>
+    <div class="msg-title">Complaint closure — final follow-up</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">A few days after the complaint has been resolved. Close the loop and leave the relationship in a good place.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just wanted to check everything's been fine since we sorted <span class="placeholder">[the issue]</span>. I appreciate your patience with it — that's not usually how things go. If there's anything else, don't hesitate to get in touch.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 7 — PRICE INCREASES
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 07 of 10</div>
+  <h2>Price Increases <span class="cat-count">(4 messages)</span></h2>
+  <p>The message that keeps clients is warm, direct, and gives enough notice. Never apologise excessively.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#37</div>
+    <div class="msg-title">Price increase — long-term client</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For clients who have been with you for a year or more. Acknowledge the relationship before the number.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I wanted to give you plenty of notice — from <span class="placeholder">[date]</span> I'll be adjusting my rates to <span class="placeholder">[new rate]</span>. Costs have gone up across the board this year and I need to reflect that. You've been a brilliant client and I hope we'll carry on — but wanted to be upfront with you in good time.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#38</div>
+    <div class="msg-title">Price increase — new season rates</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Annual rate increase communicated at the start of a new season. Works well for landscaping, cleaning, and maintenance contracts.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, as we head into <span class="placeholder">[season]</span> I wanted to let you know that my rates from <span class="placeholder">[date]</span> will be <span class="placeholder">[new rate]</span> — an increase of <span class="placeholder">[amount]</span>. The quality and reliability you're used to stays exactly the same. Let me know if you'd like to talk it through.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#39</div>
+    <div class="msg-title">Price increase — material cost explanation</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When rising material costs are the primary driver. A brief honest explanation helps clients understand without feeling misled.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I need to increase my rates from <span class="placeholder">[date]</span>. Material costs have gone up significantly — <span class="placeholder">[materials]</span> alone are up <span class="placeholder">[X]%</span> this year — and I can't absorb that any longer without it showing in my work. New rate will be <span class="placeholder">[amount]</span>. I appreciate your understanding.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#40</div>
+    <div class="msg-title">Price increase — short notice</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you need to raise prices quickly and can't give the usual 4-week notice. Acknowledge the short notice directly.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm sorry for the short notice on this — from <span class="placeholder">[date, 2 weeks away]</span> my rates will increase to <span class="placeholder">[new rate]</span>. I've held them as long as I could but it's no longer viable. I want to be upfront with you rather than spring it on you without warning.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 8 — SEASONAL & REACTIVATION
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 08 of 10</div>
+  <h2>Seasonal &amp; Reactivation <span class="cat-count">(5 messages)</span></h2>
+  <p>Past customers are your best leads. One message at the right time converts better than any advertisement.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#41</div>
+    <div class="msg-title">Slow season reactivation — past customer</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Reach out to customers you haven't heard from in 6 to 12 months. Warm, not salesy. Reference the previous job.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, it's been a while since we did <span class="placeholder">[job]</span> at yours — hope everything's still working well. Just wanted to reach out in case you had anything coming up. Happy to come and take a look at anything, no obligation.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#42</div>
+    <div class="msg-title">Pre-season reminder — maintenance</div>
+    <div class="msg-trade">HVAC / Plumbing</div>
+  </div>
+  <div class="msg-context">Before heating or cooling season. Sent to customers who had a service last year and are likely due again.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just reaching out ahead of <span class="placeholder">[season]</span> — your <span class="placeholder">[boiler/AC unit]</span> is due for its annual service. I've got a few slots left in <span class="placeholder">[month]</span> before it gets busy. Want me to pencil one in?
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#43</div>
+    <div class="msg-title">Seasonal promotion — limited slots</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you want to fill slots quickly at the start of a busy period. Be honest about availability — don't invent urgency.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, heading into <span class="placeholder">[season]</span> and I've got a handful of slots available in <span class="placeholder">[month]</span> before the diary fills up. If you've been thinking about <span class="placeholder">[job type]</span>, now's a good time to get in. Just reply here and I'll check dates.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#44</div>
+    <div class="msg-title">Winter prep reminder</div>
+    <div class="msg-trade">Plumbing</div>
+  </div>
+  <div class="msg-context">Autumn outreach to past plumbing customers about pipe lagging, boiler checks, and winter readiness before the cold hits.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just a heads-up as the cold weather's coming — it's worth checking your pipes are lagged and your boiler is serviced before winter. Happy to come and take a look if you'd like a once-over before the busy season kicks in.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#45</div>
+    <div class="msg-title">Spring clean outreach</div>
+    <div class="msg-trade">Cleaning</div>
+  </div>
+  <div class="msg-context">For cleaning businesses reaching out to past customers ahead of spring. Works well for one-off deep cleans or restarting regular bookings.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, hope you're well — just reaching out as we head into spring. A lot of my clients use this time of year to get a deep clean done or get back into a regular schedule. If that's something you'd like to look at, just let me know and I'll check my availability.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CATEGORY 9 — HIRING & TEAM
+══════════════════════════════════════════ -->
+<div class="cat-header">
+  <div class="section-label">Category 09 of 10</div>
+  <h2>Hiring &amp; Team <span class="cat-count">(5 messages)</span></h2>
+  <p>The messages that build your team. Written to attract people who are already employed, not just anyone available.</p>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#46</div>
+    <div class="msg-title">Job ad — apprentice / entry level</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For posting on Facebook, local groups, or job boards. Describes the opportunity rather than the requirements.</div>
+  <div class="msg-body">We're looking for a motivated <span class="placeholder">[trade]</span> apprentice to join our small team in <span class="placeholder">[area]</span>. You don't need experience — just a genuine interest in the trade, good reliability, and a willingness to learn. We do mostly <span class="placeholder">[type of work]</span> and you'll be working alongside me on every job. Full training, <span class="placeholder">[pay]</span>, and a long-term opportunity for the right person. Message me directly if you're interested.
+
+<span class="placeholder">[Your name]</span>, <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#47</div>
+    <div class="msg-title">New hire welcome message</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">Sent to a new team member on their first day or the evening before. Sets the tone and makes them feel genuinely welcomed.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, really glad you're joining us. We start at <span class="placeholder">[time]</span> — meet me at <span class="placeholder">[location]</span>. Wear <span class="placeholder">[work clothes/uniform details]</span> and bring your <span class="placeholder">[any required documents/gear]</span>. Any questions before tomorrow, just message me here. Looking forward to it.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#48</div>
+    <div class="msg-title">Reference request to past employer</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you need a reference for a new hire. Short, professional, gives the recipient an easy way to respond.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, I'm considering taking on <span class="placeholder">[candidate name]</span> and they listed you as a reference. I just had a couple of quick questions about their reliability and quality of work — would you be happy to have a brief chat or reply here? Won't take long.
+
+<span class="placeholder">[Your name]</span>, <span class="placeholder">[Business name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#49</div>
+    <div class="msg-title">Performance conversation opener</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">When you need to address a performance or behaviour issue with a team member. Opens the conversation without escalating it.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, can we find 10 minutes to talk this week — not urgent, just want to catch up on a couple of things. Nothing to worry about, I'd just rather talk in person than over message. When are you free?
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<div class="msg-card">
+  <div class="msg-header">
+    <div class="msg-num">#50</div>
+    <div class="msg-title">Team update — new team member to customers</div>
+    <div class="msg-trade">All trades</div>
+  </div>
+  <div class="msg-context">For regular customers when you add a team member who will be visiting them. Avoids surprise and builds trust.</div>
+  <div class="msg-body">Hi <span class="placeholder">[name]</span>, just a heads-up — I've recently taken on <span class="placeholder">[new team member's name]</span>, who'll be helping out on jobs going forward. You may see them on their own sometimes. They're reliable and do great work — I'll make sure they're across everything for your place. Any questions, just let me know.
+
+<span class="placeholder">[Your name]</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONVERSION SECTION
+══════════════════════════════════════════ -->
+<div class="convert-section">
+  <h2>Want these written for your<br /><span class="amber">specific situation in 30 seconds?</span></h2>
+  <p>Every message in this guide was written the way OnToolsAI writes them — trade-specific, human, and ready to send. The difference is OnToolsAI fills in your customer's name, your job details, and your tone automatically.</p>
+  <a href="https://ontoolsai.com/app" class="cta-btn">Try OnToolsAI free → ontoolsai.com</a>
+  <div class="convert-proof">Free to try · No account needed · 10 free messages every month · Unlimited from $5.99</div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="footer-logo"><span style="color:var(--amber);">⚡</span>OnToolsAI</div>
+  <p>The Trade Business Communication Bible · Free resource from <a href="https://ontoolsai.com">ontoolsai.com</a></p>
+  <p style="margin-top:8px;font-size:11px;color:var(--subtle);">Powered by Claude AI</p>
+</footer>
+
+</body>
+</html>
